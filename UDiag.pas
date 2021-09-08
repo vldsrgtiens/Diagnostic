@@ -12,9 +12,10 @@ uses
 type
   TForm1 = class(TForm)
     TabControl1: TTabControl;
-    Intro: TTabItem;
-    TabItem2: TTabItem;
+    Authorization: TTabItem;
+    HomeTab: TTabItem;
     Layout1: TLayout;
+    SpeedButton1: TSpeedButton;
 
   private
     { Private declarations }

@@ -1,16 +1,15 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  BorderStyle = SizeToolWin
   Caption = 'Form1'
   ClientHeight = 403
   ClientWidth = 733
   Position = ScreenCenter
   StyleLookup = 'toolbarstyle'
+  WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  FullScreen = True
   DesignerMasterStyle = 0
   object TabControl1: TTabControl
     Align = Client
@@ -26,31 +25,31 @@ object Form1: TForm1
       354s
       733s
       354s)
-    object Intro: TTabItem
+    object Authorization: TTabItem
       CustomIcon = <
         item
         end>
       IsSelected = False
-      Size.Width = 51.000000000000000000
+      Size.Width = 98.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
-      Text = 'Intro'
+      Text = 'Authorization'
       ExplicitSize.cx = 365.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
     end
-    object TabItem2: TTabItem
+    object HomeTab: TTabItem
       CustomIcon = <
         item
         end>
       IsSelected = True
-      Size.Width = 76.000000000000000000
+      Size.Width = 78.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
-      Text = 'TabItem2'
+      Text = 'HomeTab'
       ExplicitSize.cx = 366.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
       object Layout1: TLayout
@@ -59,6 +58,12 @@ object Form1: TForm1
         Size.Height = 354.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
+        object SpeedButton1: TSpeedButton
+          Position.X = 168.000000000000000000
+          Position.Y = 64.000000000000000000
+          StyleLookup = 'buttonstyle'
+          Text = 'SpeedButton1'
+        end
       end
     end
   end
