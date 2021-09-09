@@ -11,7 +11,9 @@ uses
   UDataModule,
   FMX.ActnList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
-  Data.Bind.DBScope;
+  Data.Bind.DBScope, FireDAC.UI.Intf, FireDAC.FMXUI.Wait,
+  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys,
+  FireDAC.Phys.SQLite, FireDAC.Stan.Intf, FireDAC.Comp.UI;
 
 type
   TForm11 = class(TForm)
@@ -105,7 +107,11 @@ type
     BindSourceDB2: TBindSourceDB;
     LinkFillControlToField2: TLinkFillControlToField;
     LabelFirstName: TLabel;
-    LinkPropertyToFieldText2: TLinkPropertyToField;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
+    SpeedButton1: TSpeedButton;
+    LinkPropertyToFieldText: TLinkPropertyToField;
+    Label12: TLabel;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -114,6 +120,9 @@ type
     procedure Image8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CornerButton1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure ListView1ItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     { Private declarations }
   public
@@ -182,6 +191,18 @@ end;
 procedure TForm11.Image8Click(Sender: TObject);
 begin
  Application.Terminate;
+end;
+
+procedure TForm11.ListView1ItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  Label12.Text:=IntToStr(AItem.Index);
+end;
+
+procedure TForm11.SpeedButton1Click(Sender: TObject);
+begin
+ DataModule1.FDQueryPatients.Next;
+ BindSourceDB2.DataSet.Refresh;
 end;
 
 procedure TForm11.Switch1Switch(Sender: TObject);
