@@ -7,7 +7,11 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.TabControl, FMX.Edit,
   FMX.DateTimeCtrls, FMX.ListView.Types, FMX.ListView.Appearances,
-  FMX.ListView.Adapters.Base, FMX.ListView, System.Actions, FMX.ActnList;
+  FMX.ListView.Adapters.Base, FMX.ListView, System.Actions,
+  UDataModule,
+  FMX.ActnList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
+  Data.Bind.DBScope;
 
 type
   TForm11 = class(TForm)
@@ -91,6 +95,11 @@ type
     ChangeTabAction1: TChangeTabAction;
     StyleBook1: TStyleBook;
     Panel4: TPanel;
+    Layout22: TLayout;
+    Image10: TImage;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    LinkFillControlToField1: TLinkFillControlToField;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
