@@ -100,12 +100,20 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
+    CornerButton1: TCornerButton;
+    ListView2: TListView;
+    BindSourceDB2: TBindSourceDB;
+    LinkFillControlToField2: TLinkFillControlToField;
+    LabelFirstName: TLabel;
+    LinkPropertyToFieldText2: TLinkPropertyToField;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
     procedure ButtonSettingsClick(Sender: TObject);
     procedure Image7Click(Sender: TObject);
     procedure Image8Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CornerButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -129,9 +137,29 @@ begin
 TabControl1.ActiveTab:=TabControl1.Tabs[5];
 end;
 
+procedure TForm11.CornerButton1Click(Sender: TObject);
+begin
+DataModule1.FDConnection1.Connected:= True;
+   if DataModule1.FDConnection1.Connected then
+    CornerButton1.Text:= 'Connected'
+   else
+    CornerButton1.Text:= 'Not Connected';
+end;
+
 procedure TForm11.CornerButton2Click(Sender: TObject);
 begin
 TabControl1.ActiveTab:=TabControl1.Tabs[3];
+end;
+
+procedure TForm11.FormCreate(Sender: TObject);
+begin
+{
+// DataModule1.FDConnection1.Connected:= True;
+   if DataModule1.FDConnection1.Connected then
+    CornerButton1.Text:= 'Connected'
+   else
+    CornerButton1.Text:= 'Not Connected'
+    }
 end;
 
 procedure TForm11.Image7Click(Sender: TObject);

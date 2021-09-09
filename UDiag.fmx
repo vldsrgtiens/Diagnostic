@@ -2,18 +2,19 @@ object Form11: TForm11
   Left = 0
   Top = 0
   Caption = 'Form11'
-  ClientHeight = 358
+  ClientHeight = 403
   ClientWidth = 640
   StyleBook = StyleBook1
   WindowState = wsMaximized
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object TabControl1: TTabControl
     Align = Client
     Size.Width = 640.000000000000000000
-    Size.Height = 296.000000000000000000
+    Size.Height = 341.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'tabcontrolstyle'
     TabHeight = 49.000000000000000000
@@ -22,17 +23,17 @@ object Form11: TForm11
     TabPosition = Bottom
     Sizes = (
       640s
-      247s
+      292s
       640s
-      247s
+      292s
       640s
-      247s
+      292s
       640s
-      247s
+      292s
       640s
-      247s
+      292s
       640s
-      247s)
+      292s)
     object Authorization: TTabItem
       CustomIcon = <
         item
@@ -49,7 +50,7 @@ object Form11: TForm11
       object Layout22: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Image10: TImage
@@ -202,7 +203,7 @@ object Form11: TForm11
           Position.X = 6.000000000000000000
           Position.Y = 2.000000000000000000
           Size.Width = 64.000000000000000000
-          Size.Height = 243.000000000000000000
+          Size.Height = 288.000000000000000000
           Size.PlatformDefault = False
           OnClick = Image7Click
         end
@@ -478,7 +479,7 @@ object Form11: TForm11
       object Layout1: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout2: TLayout
@@ -1241,7 +1242,7 @@ object Form11: TForm11
       object Layout3: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Panel1: TPanel
@@ -1251,7 +1252,7 @@ object Form11: TForm11
           Margins.Right = 10.000000000000000000
           Margins.Bottom = 10.000000000000000000
           Size.Width = 620.000000000000000000
-          Size.Height = 227.000000000000000000
+          Size.Height = 272.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'panelstyle'
           TabOrder = 0
@@ -2836,7 +2837,7 @@ object Form11: TForm11
       object Layout15: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object ListView1: TListView
@@ -2844,15 +2845,17 @@ object Form11: TForm11
           ItemEditAppearanceClassName = 'TDynamicAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
-          Align = Client
+          Align = Top
+          Position.Y = 50.000000000000000000
           Size.Width = 640.000000000000000000
-          Size.Height = 197.000000000000000000
+          Size.Height = 119.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 0
+          TabOrder = 1
           ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
             item
               AppearanceObjectName = 'Text1'
               AppearanceClassName = 'TTextObjectAppearance'
+              Appearance.TextAlign = Leading
             end>
           ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
             item
@@ -2865,7 +2868,36 @@ object Form11: TForm11
           Size.Width = 640.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 1
+          TabOrder = 2
+        end
+        object ListView2: TListView
+          ItemAppearanceClassName = 'TDynamicAppearance'
+          ItemEditAppearanceClassName = 'TDynamicAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Top
+          Position.Y = 169.000000000000000000
+          Size.Width = 640.000000000000000000
+          Size.Height = 119.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+            item
+              AppearanceObjectName = 'Text1'
+              AppearanceClassName = 'TTextObjectAppearance'
+              Appearance.TextAlign = Leading
+            end>
+          ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+            item
+              AppearanceObjectName = 'Text1'
+              AppearanceClassName = 'TTextObjectAppearance'
+            end>
+          object LabelFirstName: TLabel
+            Position.X = 48.000000000000000000
+            Position.Y = 64.000000000000000000
+            Text = #1042#1083#1072#1076#1080#1084#1080#1088
+            TabOrder = 0
+          end
         end
       end
     end
@@ -2885,7 +2917,7 @@ object Form11: TForm11
       object Layout17: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout18: TLayout
@@ -2974,7 +3006,7 @@ object Form11: TForm11
         object Layout19: TLayout
           Align = Client
           Size.Width = 640.000000000000000000
-          Size.Height = 171.000000000000000000
+          Size.Height = 216.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object TabControlPatienCard: TTabControl
@@ -2984,18 +3016,18 @@ object Form11: TForm11
             Margins.Right = 4.000000000000000000
             Margins.Bottom = 4.000000000000000000
             Size.Width = 632.000000000000000000
-            Size.Height = 163.000000000000000000
+            Size.Height = 208.000000000000000000
             Size.PlatformDefault = False
             TabIndex = 0
             TabOrder = 0
             TabPosition = PlatformDefault
             Sizes = (
               632s
-              137s
+              182s
               632s
-              137s
+              182s
               632s
-              137s)
+              182s)
             object TabItem1: TTabItem
               CustomIcon.Height = 128
               CustomIcon.Width = 128
@@ -3395,7 +3427,7 @@ object Form11: TForm11
       object Layout21: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 247.000000000000000000
+        Size.Height = 292.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
       end
@@ -3752,9 +3784,21 @@ object Form11: TForm11
       Size.PlatformDefault = False
       OnClick = Image8Click
     end
+    object CornerButton1: TCornerButton
+      Align = Center
+      Sides = [Top, Left, Bottom, Right]
+      Size.Width = 121.000000000000000000
+      Size.Height = 34.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'CornerButton1'
+      XRadius = 3.000000000000000000
+      YRadius = 3.000000000000000000
+      OnClick = CornerButton1Click
+    end
   end
   object StatusBarBottom: TStatusBar
-    Position.Y = 332.000000000000000000
+    Position.Y = 377.000000000000000000
     ShowSizeGrip = True
     Size.Width = 640.000000000000000000
     Size.Height = 22.000000000000000000
@@ -3764,7 +3808,7 @@ object Form11: TForm11
   end
   object PanelKeyboard: TPanel
     Align = Bottom
-    Position.Y = 354.000000000000000000
+    Position.Y = 399.000000000000000000
     Size.Width = 640.000000000000000000
     Size.Height = 4.000000000000000000
     Size.PlatformDefault = False
@@ -11156,11 +11200,11 @@ object Form11: TForm11
           756C74080C5374726F6B652E436F6C6F72070978464639454241434410537472
           6F6B652E546869636B6E6573730500000000000000800040000000}
       end>
-    Left = 296
+    Left = 496
     Top = 8
   end
   object ActionList1: TActionList
-    Left = 336
+    Left = 544
     Top = 8
     object ChangeTabAction1: TChangeTabAction
       Category = 'Tab'
@@ -11169,8 +11213,7 @@ object Form11: TForm11
   object BindSourceDB1: TBindSourceDB
     DataSet = DataModule1.FDQueryPatients
     ScopeMappings = <>
-    Left = 304
-    Top = 168
+    Left = 72
   end
   object BindingsList1: TBindingsList
     Methods = <>
@@ -11182,16 +11225,41 @@ object Form11: TForm11
       Control = ListView1
       Track = True
       FillDataSource = BindSourceDB1
-      FillDisplayFieldName = 'FirstName'
       AutoFill = True
       FillExpressions = <
         item
-          SourceMemberName = 'MiddleName'
+          SourceMemberName = 'FullName'
           ControlMemberName = 'Text1'
         end>
       FillHeaderExpressions = <>
-      FillHeaderFieldName = 'LastName'
       FillBreakGroups = <>
     end
+    object LinkFillControlToField2: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListView2
+      Track = True
+      FillDataSource = BindSourceDB2
+      AutoFill = True
+      FillExpressions = <
+        item
+          SourceMemberName = 'EventComments'
+          ControlMemberName = 'Text1'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkPropertyToFieldText2: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'FirstName'
+      Component = LabelFirstName
+      ComponentProperty = 'Text'
+    end
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = DataModule1.FDQueryEvents
+    ScopeMappings = <>
+    Left = 192
+    Top = 8
   end
 end
