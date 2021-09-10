@@ -2860,6 +2860,7 @@ object Form11: TForm11
           Size.Height = 135.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
+          OnItemClick = ListView1ItemClick
         end
         object ListView2: TListView
           ItemAppearanceClassName = 'TListItemAppearance'

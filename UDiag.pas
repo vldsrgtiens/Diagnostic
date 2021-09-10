@@ -199,6 +199,8 @@ procedure TForm11.ListView1ItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   Label12.Text:=IntToStr(AItem.Index);
+  if ListView1.Selected <> nil then ListView2.BeginUpdate;
+
 end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);
