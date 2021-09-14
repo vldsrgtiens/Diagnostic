@@ -6,11 +6,12 @@ Coordinates=10,10,97,231
 Visible=True
 
 []
-Coordinates=309,1,91,36
+Coordinates=96,260,82,33
 Visible=True
 
 [DataSourceEvents]
-Coordinates=142,298,105,33
+Coordinates=142,298,105,141
+Visible=True
 
 [FDQueryEvents]
 Coordinates=180,260,91,141

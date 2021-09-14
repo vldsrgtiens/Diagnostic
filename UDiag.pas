@@ -8,12 +8,13 @@ uses
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.TabControl, FMX.Edit,
   FMX.DateTimeCtrls, FMX.ListView.Types, FMX.ListView.Appearances,
   FMX.ListView.Adapters.Base, FMX.ListView, System.Actions,
-  UDataModule,
+  UDataModule,Data.DB,
   FMX.ActnList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FireDAC.UI.Intf, FireDAC.FMXUI.Wait,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys,
-  FireDAC.Phys.SQLite, FireDAC.Stan.Intf, FireDAC.Comp.UI;
+  FireDAC.Phys.SQLite, FireDAC.Stan.Intf, FireDAC.Comp.UI, Data.Bind.Controls,
+  Fmx.Bind.Navigator;
 
 type
   TForm11 = class(TForm)
@@ -34,8 +35,6 @@ type
     Layout3: TLayout;
     Panel1: TPanel;
     Layout4: TLayout;
-    ImagePatientPlus: TImage;
-    Panel2: TPanel;
     Layout5: TLayout;
     Layout6: TLayout;
     Label3: TLabel;
@@ -47,7 +46,6 @@ type
     Label5: TLabel;
     EditMiddleName: TEdit;
     PanelKeyboard: TPanel;
-    Layout9: TLayout;
     Layout10: TLayout;
     Label6: TLabel;
     Switch1: TSwitch;
@@ -66,7 +64,6 @@ type
     Image5: TImage;
     Layout14: TLayout;
     Label10: TLabel;
-    DateEditBirthday: TDateEdit;
     Rectangle1: TRectangle;
     PatientsList: TTabItem;
     Layout15: TLayout;
@@ -102,18 +99,23 @@ type
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
     CornerButton1: TCornerButton;
-    BindSourceDB2: TBindSourceDB;
-    LinkFillControlToField2: TLinkFillControlToField;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     SpeedButton1: TSpeedButton;
     Label12: TLabel;
     ListView1: TListView;
-    ListView2: TListView;
-    LinkFillControlToField4: TLinkFillControlToField;
     Label13: TLabel;
     LinkPropertyToFieldText: TLinkPropertyToField;
     LinkFillControlToField3: TLinkFillControlToField;
+    Layout23: TLayout;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    ListView2: TListView;
+    BindSourceDB2: TBindSourceDB;
+    LinkFillControlToField6: TLinkFillControlToField;
+    DateEditBirthdayDate: TDateEdit;
+    LinkControlToFieldBirthdayDate: TLinkControlToField;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -164,13 +166,19 @@ end;
 
 procedure TForm11.FormCreate(Sender: TObject);
 begin
-{
-// DataModule1.FDConnection1.Connected:= True;
+
+ //DataModule1.FDConnection1.Connected:= True;
    if DataModule1.FDConnection1.Connected then
-    CornerButton1.Text:= 'Connected'
+    begin
+     CornerButton1.Text:= 'Connected';
+     DataModule1.FDQueryPatients.Active:=true;
+     DataModule1.FDQueryEvents.Active:=true;
+    end
    else
-    CornerButton1.Text:= 'Not Connected'
-    }
+    begin
+     CornerButton1.Text:= 'Not Connected';
+    end;
+
 end;
 
 procedure TForm11.Image7Click(Sender: TObject);
@@ -198,15 +206,17 @@ end;
 procedure TForm11.ListView1ItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
-  Label12.Text:=IntToStr(AItem.Index);
-  if ListView1.Selected <> nil then ListView2.BeginUpdate;
+  DataModule1.FDQueryPatients.Locate('FullName',AItem.Text,[loPartialKey]);
+  Label16.Text:='кол-во записей: '+IntToStr(DataModule1.FDQueryEvents.RecordCount);
 
+  //DataModule1.FDQueryEvents.ExecSQL;
+  //DataModule1.FDQueryEvents.Refresh;
 end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);
 begin
  DataModule1.FDQueryPatients.Next;
- BindSourceDB2.DataSet.Refresh;
+ //BindSourceDB2.DataSet.Refresh;
 end;
 
 procedure TForm11.Switch1Switch(Sender: TObject);

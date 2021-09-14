@@ -79,17 +79,11 @@ Coordinates=75,504,47,33
 [Image8]
 Coordinates=364,10,49,51
 
-[Panel2]
-Coordinates=10,504,47,33
-
 [ActionList1]
 Coordinates=898,221,70,33
 
 [Layout10]
 Coordinates=1066,458,59,33
-
-[Layout9]
-Coordinates=996,458,53,33
 
 [ButtonNewPatient]
 Coordinates=869,458,103,33
@@ -174,9 +168,6 @@ Coordinates=927,412,59,33
 [Layout4]
 Coordinates=857,412,53,33
 
-[ImagePatientPlus]
-Coordinates=486,276,100,51
-
 [LabelPatientCardMiddleName]
 Coordinates=73,276,159,51
 
@@ -198,9 +189,6 @@ Coordinates=423,276,46,51
 
 [Layout19]
 Coordinates=559,412,59,33
-
-[DateEditBirthday]
-Coordinates=764,10,115,51
 
 [PatientCard]
 Coordinates=466,412,72,33
@@ -228,6 +216,7 @@ Coordinates=809,344,49,51
 
 [Layout14]
 Coordinates=10,412,59,33
+Visible=True
 
 [Label7]
 Coordinates=77,344,46,51
@@ -245,7 +234,7 @@ Coordinates=290,10,55,51
 Coordinates=1048,344,59,33
 
 []
-Coordinates=530,80,89,159
+Coordinates=823,556,115,51
 Visible=True
 
 [Module Settings]
@@ -254,7 +243,7 @@ ActiveLayerNames=
 EditingLayerName=
 
 [BindSourceDB1]
-Coordinates=10,10,149,249
+Coordinates=30,10,149,249
 Visible=True
 
 [BindingsList1]
@@ -272,18 +261,15 @@ Visible=False
 [CornerButton1]
 Coordinates=193,240,87,33
 
-[BindSourceDB2]
-Coordinates=670,70,143,159
-
 [DataModule1.DataSourcePatients]
 Coordinates=452,556,178,33
 
 [DataModule1.DataSourceEvents]
-Coordinates=706,556,172,33
+Coordinates=1252,586,172,141
+Visible=True
 
 [DataModule1.FDQueryEvents]
-Coordinates=706,716,158,33
-Visible=False
+Coordinates=874,726,158,141
 
 [FDGUIxWaitCursor1]
 Coordinates=383,220,113,33
@@ -301,11 +287,31 @@ Coordinates=0,0,52,51
 Coordinates=193,1,89,141
 Visible=True
 
+[Label13]
+Coordinates=390,70,52,51
+Visible=True
+
+[Label14]
+Coordinates=850,120,52,51
+Visible=True
+
+[Label15]
+Coordinates=850,180,52,51
+Visible=True
+
+[Layout23]
+Coordinates=851,80,59,33
+
+[Label16]
+Coordinates=320,80,52,51
+
 [ListView2]
 Coordinates=534,80,89,141
 Visible=True
 
-[Label13]
-Coordinates=320,80,52,51
-Visible=True
+[BindSourceDB2]
+Coordinates=1070,576,119,87
+
+[DateEditBirthdayDate]
+Coordinates=383,220,120,51
 
