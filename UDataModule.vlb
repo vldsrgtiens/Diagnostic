@@ -10,12 +10,18 @@ Coordinates=96,260,82,33
 Visible=True
 
 [DataSourceEvents]
-Coordinates=142,298,105,141
+Coordinates=117,10,105,141
 Visible=True
 
 [FDQueryEvents]
-Coordinates=180,260,91,141
+Coordinates=232,10,91,141
 
 [DataSourcePatients]
 Coordinates=142,1,111,33
+
+[FDQueryTypeEvent]
+Coordinates=333,10,109,87
+
+[DataSourceTypeEvent]
+Coordinates=291,1,123,33
 

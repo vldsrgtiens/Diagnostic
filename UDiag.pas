@@ -8,13 +8,25 @@ uses
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.TabControl, FMX.Edit,
   FMX.DateTimeCtrls, FMX.ListView.Types, FMX.ListView.Appearances,
   FMX.ListView.Adapters.Base, FMX.ListView, System.Actions,
-  UDataModule,Data.DB,
+  UDataModule,Data.DB,System.IOUtils,//FMX.Helpers.Android, Androidapi.JNI.Util,
   FMX.ActnList, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
   System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, FireDAC.UI.Intf, FireDAC.FMXUI.Wait,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys,
   FireDAC.Phys.SQLite, FireDAC.Stan.Intf, FireDAC.Comp.UI, Data.Bind.Controls,
-  Fmx.Bind.Navigator;
+  Fmx.Bind.Navigator, FMX.ListBox, FMX.ScrollBox,
+  //Androidapi.Helpers,
+  FMX.Platform,
+
+  {$IFDEF ANDROID}
+   vkbdhelper,
+  {$ENDIF}
+
+
+  //FMX.Helpers.Android,
+  //Androidapi.JNI.Util,
+
+  FMX.Memo;
 
 type
   TForm11 = class(TForm)
@@ -74,7 +86,7 @@ type
     Panel3: TPanel;
     TabControlPatienCard: TTabControl;
     Layout19: TLayout;
-    TabItem1: TTabItem;
+    History: TTabItem;
     TabItem2: TTabItem;
     TabItem3: TTabItem;
     Image6: TImage;
@@ -98,7 +110,6 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
-    CornerButton1: TCornerButton;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     SpeedButton1: TSpeedButton;
@@ -116,6 +127,32 @@ type
     LinkFillControlToField6: TLinkFillControlToField;
     DateEditBirthdayDate: TDateEdit;
     LinkControlToFieldBirthdayDate: TLinkControlToField;
+    LabelPatientCardPhone1: TLabel;
+    LinkPropertyToFieldText2: TLinkPropertyToField;
+    LinkPropertyToFieldText3: TLinkPropertyToField;
+    LinkPropertyToFieldText4: TLinkPropertyToField;
+    LinkPropertyToFieldText5: TLinkPropertyToField;
+    SpeedButton2: TSpeedButton;
+    NewEvent: TTabItem;
+    Layout9: TLayout;
+    LabelToolBar: TLabel;
+    LabelStatusDB: TLabel;
+    ComboBox1: TComboBox;
+    Layout24: TLayout;
+    Layout25: TLayout;
+    Label17: TLabel;
+    BindSourceDB3: TBindSourceDB;
+    LinkFillControlToField2: TLinkFillControlToField;
+    Label18: TLabel;
+    Memo1: TMemo;
+    DateEditNewEvent: TDateEdit;
+    ButtonCancel: TCornerButton;
+    Label19: TLabel;
+    Label20: TLabel;
+    CornerButton1: TCornerButton;
+    Label21: TLabel;
+    Panel2: TPanel;
+    Memo2: TMemo;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -123,10 +160,13 @@ type
     procedure Image7Click(Sender: TObject);
     procedure Image8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure CornerButton1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure ListView1ItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure TabControl1Change(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -135,6 +175,13 @@ type
 
 var
   Form11: TForm11;
+  //Disp: JDisplayMetrics;
+  sScale,scale: Single;
+
+  NativeClientHeight, NativeClientWidth: Single; // Для формы
+  ScreenService: IFMXScreenService;
+  ScreenSize,sScreenSize: TPoint;
+
 
 implementation
 
@@ -150,35 +197,56 @@ begin
 TabControl1.ActiveTab:=TabControl1.Tabs[5];
 end;
 
-procedure TForm11.CornerButton1Click(Sender: TObject);
-begin
-DataModule1.FDConnection1.Connected:= True;
-   if DataModule1.FDConnection1.Connected then
-    CornerButton1.Text:= 'Connected'
-   else
-    CornerButton1.Text:= 'Not Connected';
-end;
-
 procedure TForm11.CornerButton2Click(Sender: TObject);
 begin
 TabControl1.ActiveTab:=TabControl1.Tabs[3];
 end;
 
+procedure TForm11.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ DataModule1.FDConnection1.Connected:=false;
+end;
+
 procedure TForm11.FormCreate(Sender: TObject);
 begin
+ {$IFDEF ANDROID}
+  DataModule1.FDConnection1.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'diagnostic.db') ;//'$(DOC)/diagnostic.db';
+  //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Внутренний доступ}
+ {$ENDIF}
 
- //DataModule1.FDConnection1.Connected:= True;
+ {$IFDEF WINDOWS}
+  DataModule1.FDConnection1.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'diagnostic.db');//'C:\Delphi\Diagnostic\diagnostic.db';
+ {$ENDIF}
+
+ DataModule1.FDConnection1.Connected:= False;
+ DataModule1.FDConnection1.Connected:= True;
    if DataModule1.FDConnection1.Connected then
     begin
-     CornerButton1.Text:= 'Connected';
+     LabelStatusDB.Text:= 'Connected';
+     DataModule1.FDQueryTypeEvent.Active:=true;
      DataModule1.FDQueryPatients.Active:=true;
      DataModule1.FDQueryEvents.Active:=true;
+
     end
    else
     begin
-     CornerButton1.Text:= 'Not Connected';
+     LabelStatusDB.Text:= 'Not Connected';
     end;
 
+end;
+
+procedure TForm11.FormResize(Sender: TObject);
+begin
+if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterface(ScreenService)) then
+  begin
+    sScreenSize := ScreenService.GetScreenSize.Round;
+    sScale := ScreenService.GetScreenScale;
+    Memo2.Lines.Add('diScreenLogic :'+ intToStr( sScreenSize.x) + ' x ' + intToStr( sScreenSize.y));
+    Memo2.Lines.Add('diScreenPhis :'+ floatToStr(sScreenSize.x * sScale) + ' x ' + floatToStr(sScreenSize.y * sScale));
+    Memo2.Lines.Add('diScreenWidth :'+ intToStr(sScreenSize.x));
+    Memo2.Lines.Add('diScreenHeight :'+ intToStr(sScreenSize.y));
+    Memo2.Lines.Add('diScale :'+ FloatToStr( sScale));
+  end;
 end;
 
 procedure TForm11.Image7Click(Sender: TObject);
@@ -209,14 +277,22 @@ begin
   DataModule1.FDQueryPatients.Locate('FullName',AItem.Text,[loPartialKey]);
   Label16.Text:='кол-во записей: '+IntToStr(DataModule1.FDQueryEvents.RecordCount);
 
-  //DataModule1.FDQueryEvents.ExecSQL;
-  //DataModule1.FDQueryEvents.Refresh;
+  DataModule1.FDQueryEvents.Active:=false;
+  ListView2.Items.Clear;
+  DataModule1.FDQueryEvents.Active:=true;
 end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);
 begin
  DataModule1.FDQueryPatients.Next;
  //BindSourceDB2.DataSet.Refresh;
+end;
+
+procedure TForm11.SpeedButton2Click(Sender: TObject);
+begin
+ DataModule1.FDQueryEvents.Active:=false;
+ ListView2.Items.Clear;
+ DataModule1.FDQueryEvents.Active:=true;
 end;
 
 procedure TForm11.Switch1Switch(Sender: TObject);
@@ -226,6 +302,33 @@ begin
  else
   LabelGender.Text:='мужчина';
 
+end;
+
+procedure TForm11.TabControl1Change(Sender: TObject);
+begin
+ case TabControl1.ActiveTab.Index of
+   0:begin
+      LabelToolBar.Text:='Authorization';
+   end;
+   1:begin
+      LabelToolBar.Text:='Home';
+   end;
+   2:begin
+      LabelToolBar.Text:='Новый пациент';
+   end;
+   3:begin
+      LabelToolBar.Text:='Список пациентов';
+   end;
+   4:begin
+      LabelToolBar.Text:='Карточка пациента';
+   end;
+   5:begin
+      LabelToolBar.Text:='Настройки';
+   end;
+   6:begin
+      LabelToolBar.Text:='Новое событие';
+   end;
+ end;
 end;
 
 end.

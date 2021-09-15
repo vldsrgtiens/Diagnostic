@@ -18,6 +18,8 @@ type
     DataSourcePatients: TDataSource;
     DataSourceEvents: TDataSource;
     FDQueryEvents: TFDQuery;
+    FDQueryTypeEvent: TFDQuery;
+    DataSourceTypeEvent: TDataSource;
   private
     { Private declarations }
   public
