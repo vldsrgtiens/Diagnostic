@@ -94,7 +94,6 @@ type
     LabelPatientCardFirstName: TLabel;
     LabelPatientCardLastName: TLabel;
     LabelPatientCardMiddleName: TLabel;
-    Image7: TImage;
     Image8: TImage;
     ButtonSettings: TCornerButton;
     Image9: TImage;
@@ -112,7 +111,6 @@ type
     LinkFillControlToField1: TLinkFillControlToField;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
-    SpeedButton1: TSpeedButton;
     Label12: TLabel;
     ListView1: TListView;
     Label13: TLabel;
@@ -145,35 +143,38 @@ type
     LinkFillControlToField2: TLinkFillControlToField;
     Label18: TLabel;
     Memo1: TMemo;
-    ButtonCancel: TCornerButton;
-    Label19: TLabel;
     Label20: TLabel;
-    CornerButton1: TCornerButton;
-    Label21: TLabel;
     Panel2: TPanel;
     Memo2: TMemo;
     DateEdit1: TDateEdit;
     Panel5: TPanel;
     Layout26: TLayout;
     Layout27: TLayout;
+    DownButtonBack: TImage;
+    CornerButton1: TCornerButton;
+    Image12: TImage;
+    Label19: TLabel;
+    SpeedButton1: TSpeedButton;
+    Image7: TImage;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
     procedure ButtonSettingsClick(Sender: TObject);
-    procedure Image7Click(Sender: TObject);
     procedure Image8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure ListView1ItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure TabControl1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormResize(Sender: TObject);
+    procedure DownButtonBackResize(Sender: TObject);
+    procedure DownButtonBackClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    procedure TabControlChange;
   end;
 
 var
@@ -193,17 +194,17 @@ implementation
 
 procedure TForm11.ButtonNewPatientClick(Sender: TObject);
 begin
- TabControl1.ActiveTab:=TabControl1.Tabs[2];
+ TabControl1.SetActiveTabWithTransition(NewPatient, TTabTransition.Slide,  TTabTransitionDirection.Normal);
 end;
 
 procedure TForm11.ButtonSettingsClick(Sender: TObject);
 begin
-TabControl1.ActiveTab:=TabControl1.Tabs[5];
+ TabControl1.SetActiveTabWithTransition(Settings, TTabTransition.Slide,  TTabTransitionDirection.Normal);
 end;
 
 procedure TForm11.CornerButton2Click(Sender: TObject);
 begin
-TabControl1.ActiveTab:=TabControl1.Tabs[3];
+ TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Normal);
 end;
 
 procedure TForm11.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -255,42 +256,75 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
   case TOSVersion.Platform of
     pfWindows: begin
       OSPlatform := 'Windows';
+      Layout24.Align:= TAlignLayout.Left;
+      Layout24.Align:= TAlignLayout.Center;
       Layout24.Width:=sScreenSize.X div 4;
+      Layout26.Align:= TAlignLayout.Left;
+      Layout26.Align:= TAlignLayout.Center;
       Layout26.Width:=sScreenSize.X div 4;
+      Layout27.Align:= TAlignLayout.Left;
+      Layout27.Align:= TAlignLayout.Center;
       Layout27.Width:=sScreenSize.X div 4;
     end;
 
     pfAndroid: begin
       OSPlatform := 'Android';
+      Layout24.Align:= TAlignLayout.Client;
       Layout24.Width:=sScreenSize.X;
+      Layout26.Align:= TAlignLayout.Client;
       Layout26.Width:=sScreenSize.X;
+      Layout27.Align:= TAlignLayout.Client;
       Layout27.Width:=sScreenSize.X;
     end;
     else
      begin
       OSPlatform := 'UNKNOWN';
+      Layout24.Align:= TAlignLayout.Center;
       Layout24.Width:=sScreenSize.X div 4;
+      Layout26.Align:= TAlignLayout.Center;
       Layout26.Width:=sScreenSize.X div 4;
+      Layout27.Align:= TAlignLayout.Center;
       Layout27.Width:=sScreenSize.X div 4;
      end;
   end;
 end;
 
-procedure TForm11.Image7Click(Sender: TObject);
+procedure TForm11.DownButtonBackClick(Sender: TObject);
 begin
+  case TabControl1.ActiveTab.Index of
+   0:begin
+      LabelToolBar.Text:='Authorization';
+      TabControl1.SetActiveTabWithTransition(Authorization, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   1:begin
+      LabelToolBar.Text:='Home';
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   2:begin
+      LabelToolBar.Text:='Новый пациент';
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   3:begin
+      LabelToolBar.Text:='Список пациентов';
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   4:begin
+      LabelToolBar.Text:='Карточка пациента';
+      TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   5:begin
+      LabelToolBar.Text:='Настройки';
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   6:begin
+      LabelToolBar.Text:='Новое событие';
+   end;
+  end;
+end;
 
-
- case  TabControl1.TabIndex of
-  1: begin  //Home
-      //TabControl1.ActiveTab:=Authorization;
-      ChangeTabAction1.Tab := PatientsList;
-      ChangeTabAction1.Direction:= TTabTransitionDirection.Reversed;
-      // Call the action
-      ChangeTabAction1.ExecuteTarget(nil);
-     end;
-
- end;
-
+procedure TForm11.DownButtonBackResize(Sender: TObject);
+begin
+ Self.Width:=Self.Height;
 end;
 
 procedure TForm11.Image8Click(Sender: TObject);
@@ -311,8 +345,10 @@ end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);
 begin
- DataModule1.FDQueryPatients.Next;
- //BindSourceDB2.DataSet.Refresh;
+ if TabControl1.TabPosition=TTabPosition.Top then
+  TabControl1.TabPosition:=TTabPosition.None
+ else
+  TabControl1.TabPosition:=TTabPosition.Top;
 end;
 
 procedure TForm11.SpeedButton2Click(Sender: TObject);
@@ -331,31 +367,9 @@ begin
 
 end;
 
-procedure TForm11.TabControl1Change(Sender: TObject);
+procedure TForm11.TabControlChange;
 begin
- case TabControl1.ActiveTab.Index of
-   0:begin
-      LabelToolBar.Text:='Authorization';
-   end;
-   1:begin
-      LabelToolBar.Text:='Home';
-   end;
-   2:begin
-      LabelToolBar.Text:='Новый пациент';
-   end;
-   3:begin
-      LabelToolBar.Text:='Список пациентов';
-   end;
-   4:begin
-      LabelToolBar.Text:='Карточка пациента';
-   end;
-   5:begin
-      LabelToolBar.Text:='Настройки';
-   end;
-   6:begin
-      LabelToolBar.Text:='Новое событие';
-   end;
- end;
+
 end;
 
 end.

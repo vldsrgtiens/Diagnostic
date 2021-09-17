@@ -101,9 +101,6 @@ Coordinates=723,809,49,51
 Coordinates=376,655,148,51
 Visible=True
 
-[Image7]
-Coordinates=281,732,49,51
-
 [Layout13]
 Coordinates=784,886,59,33
 
@@ -233,7 +230,7 @@ Coordinates=671,732,55,51
 Coordinates=170,945,59,33
 
 []
-Coordinates=1414,886,87,33
+Coordinates=613,809,84,51
 Visible=True
 
 [Module Settings]
@@ -273,9 +270,6 @@ Coordinates=383,220,113,33
 
 [FDPhysSQLiteDriverLink1]
 Coordinates=624,80,142,33
-
-[SpeedButton1]
-Coordinates=613,809,84,51
 
 [Label12]
 Coordinates=1828,732,52,51

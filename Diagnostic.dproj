@@ -147,11 +147,11 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
-        <DCC_DcpOutput>C:\Delphi\Test\</DCC_DcpOutput>
-        <DCC_ExeOutput>C:\Delphi\Test\</DCC_ExeOutput>
-        <DCC_BplOutput>C:\Delphi\Test\</DCC_BplOutput>
-        <DCC_DcuOutput>C:\Delphi\Test\</DCC_DcuOutput>
-        <DCC_UnitSearchPath>C:\Delphi\Test\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_DcpOutput>C:\Delphi\Diagnostic\</DCC_DcpOutput>
+        <DCC_ExeOutput>C:\Delphi\Diagnostic\</DCC_ExeOutput>
+        <DCC_BplOutput>C:\Delphi\Diagnostic\</DCC_BplOutput>
+        <DCC_DcuOutput>C:\Delphi\Diagnostic\</DCC_DcuOutput>
+        <DCC_UnitSearchPath>C:\Delphi\Diagnostic\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
