@@ -26,7 +26,7 @@ uses
   //FMX.Helpers.Android,
   //Androidapi.JNI.Util,
 
-  FMX.Memo;
+  FMX.Memo, FMX.Calendar;
 
 type
   TForm11 = class(TForm)
@@ -145,7 +145,6 @@ type
     LinkFillControlToField2: TLinkFillControlToField;
     Label18: TLabel;
     Memo1: TMemo;
-    DateEditNewEvent: TDateEdit;
     ButtonCancel: TCornerButton;
     Label19: TLabel;
     Label20: TLabel;
@@ -153,6 +152,10 @@ type
     Label21: TLabel;
     Panel2: TPanel;
     Memo2: TMemo;
+    DateEdit1: TDateEdit;
+    Panel5: TPanel;
+    Layout26: TLayout;
+    Layout27: TLayout;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -177,6 +180,7 @@ var
   Form11: TForm11;
   //Disp: JDisplayMetrics;
   sScale,scale: Single;
+  OSPlatform: string;
 
   NativeClientHeight, NativeClientWidth: Single; // Для формы
   ScreenService: IFMXScreenService;
@@ -218,7 +222,7 @@ begin
   DataModule1.FDConnection1.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'diagnostic.db');//'C:\Delphi\Diagnostic\diagnostic.db';
  {$ENDIF}
 
- DataModule1.FDConnection1.Connected:= False;
+  DataModule1.FDConnection1.Connected:= False;
  DataModule1.FDConnection1.Connected:= True;
    if DataModule1.FDConnection1.Connected then
     begin
@@ -246,6 +250,29 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
     Memo2.Lines.Add('diScreenWidth :'+ intToStr(sScreenSize.x));
     Memo2.Lines.Add('diScreenHeight :'+ intToStr(sScreenSize.y));
     Memo2.Lines.Add('diScale :'+ FloatToStr( sScale));
+  end;
+
+  case TOSVersion.Platform of
+    pfWindows: begin
+      OSPlatform := 'Windows';
+      Layout24.Width:=sScreenSize.X div 4;
+      Layout26.Width:=sScreenSize.X div 4;
+      Layout27.Width:=sScreenSize.X div 4;
+    end;
+
+    pfAndroid: begin
+      OSPlatform := 'Android';
+      Layout24.Width:=sScreenSize.X;
+      Layout26.Width:=sScreenSize.X;
+      Layout27.Width:=sScreenSize.X;
+    end;
+    else
+     begin
+      OSPlatform := 'UNKNOWN';
+      Layout24.Width:=sScreenSize.X div 4;
+      Layout26.Width:=sScreenSize.X div 4;
+      Layout27.Width:=sScreenSize.X div 4;
+     end;
   end;
 end;
 
