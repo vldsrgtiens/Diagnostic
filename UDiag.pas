@@ -26,7 +26,7 @@ uses
   //FMX.Helpers.Android,
   //Androidapi.JNI.Util,
 
-  FMX.Memo, FMX.Calendar;
+  FMX.Memo, FMX.Calendar, System.ImageList, FMX.ImgList;
 
 type
   TForm11 = class(TForm)
@@ -187,6 +187,7 @@ type
     Image15: TImage;
     Label24: TLabel;
     LinkFillControlToField4: TLinkFillControlToField;
+    ImageList1: TImageList;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
