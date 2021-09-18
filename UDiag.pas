@@ -117,7 +117,6 @@ type
     LinkFillControlToField3: TLinkFillControlToField;
     ListView2: TListView;
     BindSourceDB2: TBindSourceDB;
-    LinkFillControlToField6: TLinkFillControlToField;
     DateEditBirthdayDate: TDateEdit;
     LabelPatientCardPhone1: TLabel;
     LinkPropertyToFieldText2: TLinkPropertyToField;
@@ -184,6 +183,10 @@ type
     Panel7: TPanel;
     Image6: TImage;
     Label23: TLabel;
+    ButtonExit: TCornerButton;
+    Image15: TImage;
+    Label24: TLabel;
+    LinkFillControlToField4: TLinkFillControlToField;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -202,8 +205,9 @@ type
     procedure ImagePageResize(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
     procedure DownButtonSaveNewPatientClick(Sender: TObject);
-    procedure DownButtonEditPatientClick(Sender: TObject);
     procedure DownPanelOkClick(Sender: TObject);
+    procedure Panel7Click(Sender: TObject);
+    procedure ButtonExitClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -255,6 +259,11 @@ end;
 procedure TForm11.ButtonEventsListClick(Sender: TObject);
 begin
  TabControl1.SetActiveTabWithTransition(EventsList, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+end;
+
+procedure TForm11.ButtonExitClick(Sender: TObject);
+begin
+ Application.Terminate;
 end;
 
 function TForm11.CheckNewOrEditPatient(): boolean;
@@ -447,20 +456,6 @@ begin
  ImagePage.Width:=ImagePage.Height;
 end;
 
-procedure TForm11.DownButtonEditPatientClick(Sender: TObject);
-begin
- if TabControl1.ActiveTab=PatientCard then
-  begin
-   NewOrEditPatient:=false;
-   BeforEditPatient;
-  end
- else
-  NewOrEditPatient:=true;
-
- TabControl1.SetActiveTabWithTransition(NewPatient, TTabTransition.Slide,  TTabTransitionDirection.Normal);
-
-end;
-
 procedure TForm11.Image8Click(Sender: TObject);
 begin
  Application.Terminate;
@@ -475,6 +470,15 @@ begin
   ListView2.Items.Clear;
   DataModule1.FDQueryEvents.Active:=true;
   DownPanelOk.Enabled:=true;
+end;
+
+procedure TForm11.Panel7Click(Sender: TObject);
+begin
+ NewOrEditPatient:=false;
+ BeforEditPatient;
+
+ TabControl1.SetActiveTabWithTransition(NewPatient, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+
 end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);

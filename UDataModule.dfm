@@ -13,7 +13,6 @@ object DataModule1: TDataModule1
     Top = 8
   end
   object FDQueryPatients: TFDQuery
-    Active = True
     IndexFieldNames = 'ID_Patient'
     Connection = FDConnection1
     SQL.Strings = (
@@ -38,14 +37,13 @@ object DataModule1: TDataModule1
     Top = 64
   end
   object FDQueryEvents: TFDQuery
-    Active = True
     IndexFieldNames = 'ID_Patient'
     MasterSource = DataSourcePatients
     MasterFields = 'ID_Patient'
     Connection = FDConnection1
     SQL.Strings = (
       'select * from Events where ID_Patient=:ID_Patient')
-    Left = 176
+    Left = 232
     Top = 8
     ParamData = <
       item
@@ -56,17 +54,16 @@ object DataModule1: TDataModule1
       end>
   end
   object FDQueryTypeEvent: TFDQuery
-    Active = True
     IndexFieldNames = 'ID_TypeEvent'
     Connection = FDConnection1
     SQL.Strings = (
       'select * from TypeEvent')
-    Left = 264
+    Left = 352
     Top = 8
   end
   object DataSourceTypeEvent: TDataSource
     DataSet = FDQueryTypeEvent
-    Left = 272
-    Top = 64
+    Left = 352
+    Top = 80
   end
 end

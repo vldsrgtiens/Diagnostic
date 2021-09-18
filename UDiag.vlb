@@ -1,224 +1,224 @@
 ﻿[TabItem2]
-Coordinates=1814,945,59,33
+Coordinates=1514,997,59,33
 
 [EditPhone1]
-Coordinates=798,809,70,51
+Coordinates=1192,920,70,51
 
 [PanelKeyboard]
-Coordinates=434,945,89,33
+Coordinates=813,1133,89,33
 
 [Label2]
-Coordinates=1306,732,46,51
+Coordinates=10,997,46,51
 
 [Label8]
-Coordinates=1234,732,46,51
+Coordinates=1668,920,46,51
 
 [Layout17]
-Coordinates=713,945,59,33
+Coordinates=2327,1074,59,33
 
 [Panel4]
-Coordinates=1558,945,47,33
+Coordinates=1388,1074,47,33
 
 [Image5]
-Coordinates=241,809,49,51
+Coordinates=556,843,49,51
 
 [Layout5]
-Coordinates=1055,886,53,33
+Coordinates=1435,997,53,33
 
 [Layout1]
-Coordinates=1479,945,53,33
+Coordinates=943,997,53,33
 
 [Layout16]
-Coordinates=1224,945,59,33
+Coordinates=1107,997,59,33
 
 [Label10]
-Coordinates=85,809,52,51
+Coordinates=1472,843,52,51
 
 [StatusBarBottom]
-Coordinates=1427,809,99,33
+Coordinates=402,1133,99,33
 
 [ChangeTabAction1]
 Coordinates=269,498,108,33
 
 [Image4]
-Coordinates=978,732,49,51
+Coordinates=2149,920,49,51
 
 [Layout11]
-Coordinates=898,945,59,33
+Coordinates=1192,997,59,33
 
 [Image2]
-Coordinates=10,809,49,51
+Coordinates=1486,10,49,51
 
 [Layout7]
-Coordinates=1056,945,53,33
+Coordinates=851,1074,53,33
 
 [Switch1]
-Coordinates=1378,732,54,51
+Coordinates=1792,10,54,51
 
 [Label11]
-Coordinates=203,732,52,51
+Coordinates=1285,843,52,51
 
 [EditLastName]
-Coordinates=1125,732,83,51
+Coordinates=1363,843,83,51
 
 [StyleBook1]
 Coordinates=42,498,70,33
 
 [Layout3]
-Coordinates=456,886,53,33
+Coordinates=325,1074,53,33
 
 [NewPatient]
-Coordinates=1725,886,69,33
+Coordinates=1293,1074,69,33
 
 [Panel3]
-Coordinates=983,945,47,33
+Coordinates=1362,997,47,33
 
 [Image8]
-Coordinates=356,732,49,51
+Coordinates=1518,920,49,51
 
 [ActionList1]
 Coordinates=898,221,70,33
 
 [Layout10]
-Coordinates=10,945,59,33
+Coordinates=1308,1133,59,33
 
 [ButtonNewPatient]
-Coordinates=1248,886,103,33
+Coordinates=1026,1133,103,33
 
 [TabControl1]
-Coordinates=798,945,74,33
+Coordinates=225,1074,74,33
 
 [Layout8]
-Coordinates=705,886,53,33
+Coordinates=647,1074,53,33
 
 [Image3]
-Coordinates=723,809,49,51
+Coordinates=334,843,49,51
 
 [LabelPatientCardLastName]
-Coordinates=376,655,148,51
+Coordinates=478,433,148,51
 Visible=True
 
 [Layout13]
-Coordinates=784,886,59,33
+Coordinates=1113,1074,59,33
 
 [Label5]
-Coordinates=463,809,46,51
+Coordinates=1561,10,46,51
 
 [Settings]
-Coordinates=1547,886,54,33
+Coordinates=2162,1074,54,33
 
 [Label4]
-Coordinates=1053,732,46,51
+Coordinates=781,843,46,51
 
 [PatientsList]
-Coordinates=1716,945,72,33
+Coordinates=930,1074,72,33
 
 [CornerButton2]
-Coordinates=258,886,87,33
+Coordinates=2049,1074,87,33
 
 [Layout20]
-Coordinates=620,886,59,33
+Coordinates=2012,997,59,33
 
 [Label3]
-Coordinates=1646,732,46,51
+Coordinates=1446,920,46,51
 
 [Layout21]
-Coordinates=1394,945,59,33
+Coordinates=1684,997,59,33
 
 [EditFirstName]
-Coordinates=1718,732,84,51
+Coordinates=2260,843,84,51
 
 [Image1]
-Coordinates=1188,809,49,51
+Coordinates=2185,843,49,51
 
 [StatusBarTop]
-Coordinates=948,886,81,33
+Coordinates=10,1074,81,33
 Visible=True
 LayerNames=
 
 [Rectangle1]
-Coordinates=163,886,69,33
+Coordinates=1198,1074,69,33
 
 [LabelPatientCardFirstName]
-Coordinates=376,544,149,51
+Coordinates=478,121,149,51
 
 [Home]
-Coordinates=95,886,42,33
+Coordinates=1240,1133,42,33
 
 [LabelGender]
-Coordinates=894,809,77,51
+Coordinates=10,920,77,51
 
 [EditPhone2]
-Coordinates=431,732,70,51
+Coordinates=946,920,70,51
 
 [Authorization]
-Coordinates=255,945,80,33
+Coordinates=1478,1133,80,33
 
 [Layout18]
-Coordinates=371,886,59,33
+Coordinates=1599,997,59,33
 
 [Layout4]
-Coordinates=10,1004,53,33
+Coordinates=737,997,53,33
 
 [LabelPatientCardMiddleName]
-Coordinates=371,232,159,51
+Coordinates=10,433,159,51
 
 [Label6]
-Coordinates=391,809,46,51
+Coordinates=473,997,46,51
 
 [Panel1]
-Coordinates=361,945,47,33
+Coordinates=2097,997,47,33
 
 [Layout15]
-Coordinates=1462,886,59,33
+Coordinates=1584,1133,59,33
 Visible=True
 
 [Label9]
-Coordinates=527,732,46,51
+Coordinates=545,997,46,51
 
 [Layout19]
-Coordinates=10,886,59,33
+Coordinates=2242,1074,59,33
 
 [PatientCard]
-Coordinates=1627,886,72,33
+Coordinates=928,1133,72,33
 Visible=True
 
 [Layout12]
-Coordinates=535,886,59,33
+Coordinates=477,1074,59,33
 
 [EditMiddleName]
-Coordinates=858,732,94,51
+Coordinates=353,997,94,51
 
 [Image9]
-Coordinates=128,732,49,51
+Coordinates=1740,920,49,51
 
 [TabItem3]
-Coordinates=1631,945,59,33
+Coordinates=1777,1074,59,33
 
 [Layout2]
-Coordinates=549,945,53,33
+Coordinates=1698,1074,53,33
 
 [TabControlPatienCard]
-Coordinates=1660,809,123,33
+Coordinates=2243,997,123,33
 
 [Layout14]
-Coordinates=1309,945,59,33
+Coordinates=562,1074,59,33
 Visible=True
 
 [Label7]
-Coordinates=599,732,46,51
+Coordinates=631,843,46,51
 
 [Label1]
-Coordinates=1404,10,46,51
+Coordinates=82,997,46,51
 
 [Layout6]
-Coordinates=869,886,53,33
+Coordinates=734,1133,53,33
 
 [Image10]
-Coordinates=671,732,55,51
+Coordinates=790,920,55,51
 
 [Layout22]
-Coordinates=170,945,59,33
+Coordinates=1028,1074,59,33
 
 []
 Coordinates=316,809,57,58
@@ -230,11 +230,11 @@ ActiveLayerNames=
 EditingLayerName=
 
 [BindSourceDB1]
-Coordinates=142,225,149,267
+Coordinates=249,325,149,267
 Visible=True
 
 [BindingsList1]
-Coordinates=1552,809,82,33
+Coordinates=117,1074,82,33
 Visible=True
 
 [DataModule1.FDQueryPatients]
@@ -249,7 +249,7 @@ Visible=False
 Coordinates=452,556,178,33
 
 [DataModule1.DataSourceEvents]
-Coordinates=894,10,172,51
+Coordinates=937,10,172,141
 Visible=True
 
 [DataModule1.FDQueryEvents]
@@ -263,35 +263,35 @@ Coordinates=383,220,113,33
 Coordinates=624,80,142,33
 
 [Label12]
-Coordinates=1828,732,52,51
+Coordinates=1003,843,52,51
 
 [ListView1]
-Coordinates=406,343,89,141
+Coordinates=508,232,89,141
 Visible=True
 
 [Label13]
-Coordinates=10,333,52,51
+Coordinates=526,766,52,51
 Visible=True
 
 [ListView2]
-Coordinates=556,19,89,141
+Coordinates=822,10,89,141
 Visible=True
 
 [BindSourceDB2]
-Coordinates=725,10,143,159
+Coordinates=653,10,143,159
 Visible=True
 
 [DateEditBirthdayDate]
-Coordinates=390,10,120,51
+Coordinates=1815,920,120,51
 
 [LabelPatientCardPhone1]
-Coordinates=382,121,136,51
+Coordinates=484,655,136,51
 
 [History]
-Coordinates=95,945,49,33
+Coordinates=238,1133,49,33
 
 [Layout24]
-Coordinates=1342,809,59,33
+Coordinates=1927,997,59,33
 Visible=True
 
 [DataModule1.FDQueryTypeEvent]
@@ -299,169 +299,190 @@ Coordinates=1388,20,176,33
 Visible=False
 
 [Layout25]
-Coordinates=1377,886,59,33
+Coordinates=1393,1133,59,33
 
 [Layout9]
-Coordinates=1263,809,53,33
+Coordinates=1619,1074,53,33
 
 [LabelToolBar]
-Coordinates=752,732,80,51
+Coordinates=1953,10,80,51
 
 [ComboBox1]
-Coordinates=1150,0,84,123
+Coordinates=1135,10,84,123
 Visible=True
 
 [LabelStatusDB]
-Coordinates=997,809,87,51
+Coordinates=1991,843,87,51
 
 [Label17]
-Coordinates=1568,732,52,51
+Coordinates=169,843,52,51
 
 [NewEvent]
-Coordinates=1135,945,63,33
+Coordinates=313,1133,63,33
 
 [DataModule1.DataSourceTypeEvent]
 Coordinates=25,62,190,33
 
 [ButtonEventsList]
-Coordinates=1134,886,99,33
+Coordinates=726,1074,99,33
 
 [EditEmail]
-Coordinates=10,732,61,51
+Coordinates=247,843,61,51
 
 [Label20]
-Coordinates=11,158,52,51
+Coordinates=1961,920,52,51
 
 [SpeedButton1]
-Coordinates=268,158,84,51
+Coordinates=2039,920,84,51
 
 [ButtonSettings]
-Coordinates=43,254,88,33
+Coordinates=1935,1074,88,33
 
 [Panel2]
-Coordinates=290,10,47,33
+Coordinates=2170,997,47,33
 
 [Layout27]
-Coordinates=701,153,59,33
+Coordinates=1461,1074,59,33
 
 [DownButtonBack]
-Coordinates=80,158,100,51
+Coordinates=1081,843,100,51
 
 [Memo1]
-Coordinates=287,78,49,51
+Coordinates=1593,920,49,51
 
 [Memo2]
-Coordinates=0,0,49,51
+Coordinates=871,920,49,51
 
 [Panel5]
-Coordinates=701,208,47,33
+Coordinates=1862,1074,47,33
 
 [Image12]
-Coordinates=199,158,55,51
+Coordinates=1711,10,55,51
 
 [Label19]
-Coordinates=578,206,52,51
+Coordinates=113,920,52,51
 
 [DateEdit1]
-Coordinates=155,1,115,51
+Coordinates=1628,843,115,51
 
 [Layout26]
-Coordinates=701,263,59,33
+Coordinates=1277,997,59,33
 
 [Label18]
-Coordinates=76,1,52,51
+Coordinates=703,843,52,51
 
 [BindSourceDB3]
-Coordinates=1388,20,161,105
+Coordinates=1299,19,161,105
 
 [Image13]
-Coordinates=647,640,55,51
+Coordinates=1769,843,55,51
 
 [Label14]
-Coordinates=0,431,52,51
+Coordinates=191,920,52,51
 
 [DownPanelCreate]
-Coordinates=805,585,101,33
+Coordinates=816,997,101,33
 
 [DownPanelBack]
-Coordinates=696,585,94,33
+Coordinates=617,997,94,33
 
 [Image11]
-Coordinates=701,472,55,51
+Coordinates=1872,10,55,51
 
 [DownPanelSave]
-Coordinates=257,585,93,33
+Coordinates=10,1133,93,33
 
 [DownPanelEdit]
-Coordinates=148,585,89,33
+Coordinates=527,1133,89,33
 
 [ImageZeroNewPatient]
-Coordinates=716,640,121,51
+Coordinates=409,843,121,51
 
 [Label22]
-Coordinates=200,489,52,51
+Coordinates=402,920,52,51
 
 [ImageZeriEventsList]
-Coordinates=701,318,115,51
+Coordinates=1850,843,115,51
 
 [Panel6]
-Coordinates=89,585,47,33
+Coordinates=404,1074,47,33
 
 [ImageZeroPatientCard]
-Coordinates=552,489,124,51
+Coordinates=1042,920,124,51
 
 [PanelZeroImages]
-Coordinates=1133,175,99,33
+Coordinates=1669,1133,99,33
 
 [Image14]
-Coordinates=131,489,55,51
+Coordinates=2104,843,55,51
 
 [ImagePage]
-Coordinates=595,283,68,51
+Coordinates=696,920,68,51
 
 [DownPanelOk]
-Coordinates=1133,230,83,33
+Coordinates=129,1133,83,33
 
 [ImageZeroAuthorization]
-Coordinates=934,87,132,51
+Coordinates=1288,920,132,51
 
 [ImageZeroPatientsList]
-Coordinates=934,276,124,51
+Coordinates=853,843,124,51
 
 [EventsList]
-Coordinates=0,549,66,33
+Coordinates=642,1133,66,33
 
 [Label15]
-Coordinates=865,640,52,51
+Coordinates=1633,10,52,51
 
 [Label16]
-Coordinates=934,584,52,51
+Coordinates=154,997,52,51
 
 [ImageZeroNewEvent]
-Coordinates=934,353,115,51
+Coordinates=555,920,115,51
 
 [temp]
-Coordinates=322,254,40,33
+Coordinates=1861,997,40,33
 
 [ImageZeroSettings]
-Coordinates=871,430,107,51
+Coordinates=269,920,107,51
 
 [Label21]
-Coordinates=934,507,52,51
+Coordinates=1207,843,52,51
 
 [ImageZeroHome]
-Coordinates=871,153,95,51
+Coordinates=232,997,95,51
 
 [Image7]
-Coordinates=701,395,49,51
+Coordinates=480,920,49,51
 
 [LabelPatientCardEmail]
-Coordinates=360,490,126,51
+Coordinates=489,10,126,51
 Visible=True
 
 [Layout23]
-Coordinates=416,80,59,33
+Coordinates=1022,997,59,33
 
 [LabelPatientCardBirthday]
-Coordinates=380,290,140,51
+Coordinates=482,544,140,51
+
+[Label24]
+Coordinates=91,843,52,51
+
+[Image6]
+Coordinates=2224,920,49,51
+
+[ButtonExit]
+Coordinates=1769,997,66,33
+
+[Label23]
+Coordinates=1550,843,52,51
+
+[Layout28]
+Coordinates=1155,1133,59,33
+
+[Image15]
+Coordinates=10,843,55,51
+
+[Panel7]
+Coordinates=1546,1074,47,33
 

@@ -3,7 +3,7 @@ object Form11: TForm11
   Top = 0
   BorderStyle = Single
   Caption = 'DiagnosticBook'
-  ClientHeight = 488
+  ClientHeight = 396
   ClientWidth = 640
   WindowState = wsMaximized
   FormFactor.Width = 320
@@ -16,33 +16,33 @@ object Form11: TForm11
   object TabControl1: TTabControl
     Align = Client
     Size.Width = 640.000000000000000000
-    Size.Height = 353.000000000000000000
+    Size.Height = 261.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'tabcontrolstyle'
     TabHeight = 49.000000000000000000
-    TabIndex = 4
+    TabIndex = 7
     TabOrder = 0
     TabPosition = Top
     OnChange = TabControl1Change
     Sizes = (
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s
+      212s
       640s
-      304s)
+      212s)
     object Authorization: TTabItem
       CustomIcon = <
         item
@@ -59,7 +59,7 @@ object Form11: TForm11
       object Layout22: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Image10: TImage
@@ -212,7 +212,7 @@ object Form11: TForm11
           Position.X = 6.000000000000000000
           Position.Y = 2.000000000000000000
           Size.Width = 64.000000000000000000
-          Size.Height = 300.000000000000000000
+          Size.Height = 208.000000000000000000
           Size.PlatformDefault = False
         end
         object Memo2: TMemo
@@ -220,11 +220,11 @@ object Form11: TForm11
           DataDetectorTypes = []
           Align = Client
           Size.Width = 568.000000000000000000
-          Size.Height = 304.000000000000000000
+          Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           Viewport.Width = 564.000000000000000000
-          Viewport.Height = 300.000000000000000000
+          Viewport.Height = 208.000000000000000000
         end
       end
     end
@@ -247,13 +247,13 @@ object Form11: TForm11
       object Layout1: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout2: TLayout
           Align = Center
           Size.Width = 240.000000000000000000
-          Size.Height = 271.000000000000000000
+          Size.Height = 345.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object ButtonNewPatient: TCornerButton
@@ -935,7 +935,7 @@ object Form11: TForm11
             Size.Height = 64.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'cornerbuttonstyle'
-            TabOrder = 3
+            TabOrder = 4
             TextSettings.Font.Size = 18.000000000000000000
             TextSettings.HorzAlign = Trailing
             TextSettings.WordWrap = True
@@ -1192,6 +1192,219 @@ object Form11: TForm11
               TabOrder = 1
             end
           end
+          object ButtonExit: TCornerButton
+            Align = Top
+            StyledSettings = [Family, Style, FontColor]
+            Margins.Top = 5.000000000000000000
+            Position.Y = 276.000000000000000000
+            Sides = [Top, Left, Bottom, Right]
+            Size.Width = 240.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'cornerbuttonstyle'
+            TabOrder = 3
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.HorzAlign = Trailing
+            TextSettings.WordWrap = True
+            XRadius = 10.000000000000000000
+            YRadius = 10.000000000000000000
+            OnClick = ButtonExitClick
+            object Image15: TImage
+              MultiResBitmap.Height = 128
+              MultiResBitmap.Width = 128
+              MultiResBitmap = <
+                item
+                  Width = 128
+                  Height = 128
+                  PNG = {
+                    89504E470D0A1A0A0000000D4948445200000080000000800806000000C33E61
+                    CB000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                    13C449444154785EED9D097C1445BEC7FF3D09B90F727384700BE10CA7B0102E
+                    1544D48780AEEB2AAE3E57561F0FD1C7BABBEEFA11D7BD57D8DDB7EFED3B14C5
+                    070B0828E00A1F2EE5262140387390908310482027E4CE6432EFFFAFAEEEE924
+                    3D397B263D99FE0EBF99AEEAEAAE9AFAFFEB5FD53DC344F0DF77C10A80FF0481
+                    9E71D30A023E689BA511DC051E6082006B03C4090D30D1DF0BA27CBC20B09707
+                    CA13BC3D3C78490367526FB140A5B9012A1B2C50526B862B557590D62040B555
+                    0013DA0CFF21B667B2AB0CDA39FDF1492004EFBB28DA9D3D444C8A82943B040D
+                    FF64602F981C1EC4730DF44CFABD2A38545603798D269EC3ECAD343F83394010
+                    8B00228D686C014B7A08E28103C0024B033D212E3490A50D5C8B6BE808FBEFD5
+                    41BE05C7BEB5D1E6006471B431738000740044DCC163004580D8C67A5815DD1B
+                    FC30C41BB82E0D8D56D8945F0AE9E804D2442D9A5B80F4272683E0FF75B21C01
+                    18E82673A10E5E1C10CEE61103D7870CFE5541299CA9E7066516C708F0044680
+                    DE7BC52980A280055F1FF230C3F3FD4328CBA087B1B7A01C4ED7D946F5358C00
+                    2613BA0313E68FB29AE1B9BEBD99C718EA795A18150C43041AE6368490BDE214
+                    10DED800EFF4F1075F63CEEFD1D4E025E386824AB8DB28C0B527710DD0FBEBF3
+                    CC01DEF0B7C288607F56C8A06773A3B2063E2DB33007C029006038AEF81F40E3
+                    932718EAF98A09F085683E1508E1FF48B6BEE667610E60E03E64DDAF86F7E6E2
+                    55C0B03D49D677FB19C67747964F1E05A6214203AE10AD86DC5084B062EF29EB
+                    83C63D7EB7E4A5A963C0D4DFD74BD53B0CF57C11C2FAE3E7ADF491AE81FBF1CA
+                    B47120FCE7890B564FE3A6BF5BF2EA77C683C9036DAF161E0CF57C11C2DF4E34
+                    FB34D0C06D786DE6049C02700DC0D32E43A08F170C0EED0D83C382794EF771FB
+                    5E259CCD2BE0A9F6E3EDE90183C2F03D8406B36DA2A2B61E724ACB21A7E41E4B
+                    3B9AD7E32782F0D7A3E75CC601A8A3660E8D86D83EE13C471F6C3B9F0AC59535
+                    3CD53A83C37B436C54180CC1577BDCAFAD837D2959ED3E676759397B12087F39
+                    72D6251C2022C00F96C48D90478B5EA86BB0C0C6C4CBECD51ED4F6F1D1913034
+                    3CA443ED3F949E0B6985C53CA53DABE64C06E1CFDF26E9DE01827CBCE1B929A3
+                    B0F3F473B95A54590D6905C5908A0652333EB59946795C741404FB7AF3DC8EB3
+                    E56C0AABCB11BC31770A08EBBF39A37B0758366124448774FFDDCAA28A6A66F0
+                    ACA23216A69B43A39B46F9A8BEE19AB5F77E4D1D7C927089A7B4E5CD795341F8
+                    F050A2AE1D604048203C3D69144F391F32C0F5A25248BE79876DAB312C220486
+                    A246F78BE039DA7220350B526E6B3F15FCDBC30F82F0C78309BA768047470F81
+                    D17D2379CA39D43534404A4111767A11DCC551AF4664A01F8EF408347E689742
+                    7C7B2007DC732983A7B463CD23D340F8FD81D3BA768057674E7478072B399D75
+                    13CEE1659DDABC4E217E4CBF4836D2A3029DF711FA3D8C3CFF7B3299A7B4E3ED
+                    F9D3C1A47687484F7296F169D46F3B970227D1016ACD4D3F221F8D237DF1F807
+                    60D5DCA9306FC420A71A9FA03E50B6472B11A6C6462BE859CE624BD255C82D2E
+                    97EBF5F230E1F4339419FDB131C3607864182FD93D28FB442B11A6466B23E859
+                    CEE0705A3614DCAB90EB1C16190A3F9A3519C6F58F021F9D7C52AAEC13AD44E8
+                    7E0A203F75A4CAAB6BE14C4EBE5C1F85F7A51363C11B0DAF56BEDBA4EC138D44
+                    A003D0C9F52B47733CF3865C979787073CF7E038BE475F28FB442B11262BCE05
+                    7A966ACB35543A5EEE49758D8BC6904FB76A55CA75B7947DA295980334E2C9F5
+                    2C6AA6A3945B720F6AEA1BE4BAC6A203A895D383947DA29508BC0AC005818EE5
+                    48CAAB6B9AD4D5272880EFD11FCA766A2542F78B404752565523D71315AC5FE3
+                    13CA3ED14A84EEA70047429D20D5A3F7DF3952F6895622DC3A02D0D99D555757
+                    51B6532B116E7D2790FA40AE8B77885E51F6895622DC7A1148A340AA471A117A
+                    45D9275A89306130D0F983876A8748F1C08C96FBF524ED1F8431054875B9EF14
+                    A0BE532F628EEA20895380282B854495327A91B24FB412E1D21F0695E275FCB6
+                    C44BF08B9D0761CD96BDF0EBAFBE8583573254CBAA092B68573DBA90B2AD1A89
+                    70D9FB00B5F56658B7F7182465DD84EABA7A56B6A4A21AF65FCE806D091779A9
+                    D6A1D3CB75F111A157E4766A28C244A14FCFB2C7B1F46C6678B56392AEE7C1D6
+                    D3177849FBE038908F11C7997E51BE3FAD44B86C04389A9A2597993F6E04AC7F
+                    E14978767A9C9C77069D60CBA9D6BF4747A797CA93F48CB29D5A89D0FD2290DA
+                    A9A6AA5A0CFBBCCCAC914358DE94A131F0F2EC29EC3F90507E62661EFCFD6472
+                    8B636D52D443522DA30F49EDD452CC019A2F0CF4267BD057B5A4325F265DE6B9
+                    006363FAC1CA0533E4FD899937D009CEF3BD4DA1D34BE7A06D3D636BA776225C
+                    E04E2035B4A5A60E1D209749C8C885CD27CEC9FBA24383E15F1F9DC1BEC6ADB6
+                    5F9295BE1BC7CF217E47AEE97E3D496EA786225CF62B610BE346427F34B4542E
+                    21E3066C3A6E1BE9D1A1BD61D563F1E0E3D54B75BF845C0F7BD22F523BB514E1
+                    B2DF0AF6F3F6823716C643BF9020B9ECE98C1CF8EC388D749101E80454C6BB17
+                    460295FD451555F2B1D2A248AFD8DAA99D0897BE154C4EB07AD12C08F1F795CB
+                    9F4ECF818D47CFF212E80461BD61F563B3C1872F0C69FFFAAF8FB032B42D1D47
+                    D3819E91DAA9A508FDDF09E4E1CA9EFCBCBC60FAF041B86D3BE6F4B51CF8F448
+                    925C869CE0CDC767B35F42A7FDE9B78A5819E531647F2AAB5F29DAAA919803A8
+                    2D0EF4A40B39B75843ED515D6F86E4ECFC16C79D4ACF462738C34B911384A013
+                    CC61DFFA6D5E968977885E516D731745080FACFCAD75D2D06830D1DF86EB81CC
+                    1839185E9E378DA700F28ACBE08FBBBF618EA36444BF48787BF1433CA53FFEF9
+                    6F5BF9963690C36F59FD3C98B2EF14C3B75732A1A6BE5E354CB8BA4EA665C386
+                    6F12F8DB0688090F813568685F2FDB7D04120659B1804E51B6B5AB225B93CD09
+                    C173D95BEC9DD3E5D2D4613110A9E1B763632242C017176A7A60C6C821101F3B
+                    94A7006E1497C227871320AFA88CA5474647C14F9E7A846DEB9197FEBA996F75
+                    8DBBF72AD96725F4619A79C73A7480A5A20310340B8C8DE90BC3311C7695E7E2
+                    27C1FCB8589ED2275575F5F0E3CF7641759D1946F68F849F2E99CFF7E88F1F68
+                    E00099054570E5C66D8C0262DABC731D98C4D0278AC2C3652C70262317CC16FA
+                    1F33B858E8A4F46E7CC21FA3135D21507BE9BDEB99E6FDDB11912DC9A697736F
+                    F1F72909AF0214F697955F5C0EDF5ECA8492FB55B85A54BF866C4BFB9353F164
+                    FA262DBF10526E168A6DD6BB0334EBDFF6AABCA29AD9926CDAC2D688E0F9D4EA
+                    56DFF9D03EE1103B200AAF126C7F87D6157975C10C98357A384FE11AA0A8147E
+                    B37D3F9B068851D17DE09D671E65DBAD41C7A4A2E3AC787426C48F1AC6731DCF
+                    F3EB37F2ADF641233DE3F65D5491DDE866FEF24F4DA70035651516C1D12B1950
+                    5A51D922B4B88A7E38BFA9F1738B4AE0579FEF838ADADA26E5DA222DBF00AEDE
+                    BCCDCA1EC33E7126CA76B6A5F2AA6A38969209D76EDD41E3D3FB52B72DA13A05
+                    3457654D3D9C4CCD86D41B0560B1D0B74970BDE0225AB1201E668F6966FC6DFB
+                    F03DD5352DCBF7B706EB8E0E94D792266DB523BAB993917F174EA464C1FDAA5A
+                    D97E7685089EFFB48A6FB60F7F1F2F98306400043AE9C79B7EB47016CC19FB00
+                    4FB58442F8CF36EEC2CB9B0A9E63A3F9B1B9774BE003347E95CA8F3C8EC6AB9F
+                    779F5DC453EAA4DE2C805F6EDDCBB6DB535E4B9EFDC3C77C4B9D0A74E84B39B7
+                    F0150DDF4ECCBBFFD2BE08A05415468353A9597039E736D4E0E593DAC2434BB5
+                    667C8256F26181FE2D8E5BB130BEA9F1EF94C0FB5BF642453586FD666525B509
+                    16E950790D51D6AB546D7D03A46064269BD07B6B6EAF5685B4B90650132D2A6E
+                    9594C1719C673271A1D160B150AE431E6D918386BD9A87D7B68AC76B8FCD82B9
+                    6347F0126299B55BFE019538E7D3FE88E000983D76387B958E11DF5BEBF077CF
+                    1EED29AF2552BDD283FA9CFA9E6C90870BDAA69777ED155B03E04627D588EB81
+                    EC8222387E151B819D6CC146519E96C29AEC8A6E63BFB7F9AB26E5C9F873C68D
+                    6851868D7CDC1F13110ABF7F6909BCBE680EBCB668B67C9C054793F2DCEA12DF
+                    73FBCB6B27B95EECE3BCBBA5ACCFA9EF2DF483962AB66997900E4F016A329B2D
+                    907EF30E24A4E64061D97D3C37768E46B207CDF9EF6DFA0A177338AA79D97F79
+                    7C0ECC1D379297A0918FC6579419141906EF7FFF095CC7D8D62F723DF6AB6A42
+                    47CB6B05D57907FB96FA383DAF90F5B9D2069D12D2A929C09EAAEBEAE06AEE2D
+                    4848CB86FCE23216A6D42E533A227B6C3B96840B9E1AB91C33FE789BF1B30B8B
+                    E1DDFFDB2D971918190AEFBFF0640BE34BC793DA62744C3F18858B3F5FEF5E6C
+                    0A7116D4BB89E9397005FB96FA58D9E75D934611A0B9AA6BEBE11A4684537839
+                    92899725B4706CB450F8ECB8D4CE4F4A442793CABCF4F04C98373E56DE47C6FF
+                    C567BBA0022F8568FFC08830F8E5F38B71C188C6579C03D0E6D239E451DD863E
+                    7861316C5EF34A93FA1C216A0E4D330DD8360BAA8A7EA9BC59992E0BE9D21AA0
+                    2D35E0FC945F540649E8BD1419CA2AAA54CBB5267C5655155BF1E2166A5EDC48
+                    393FBBB0087EFEE997F2FEC151E1F0ABE54F813FFDDEAEE27849723D4E9ED3ED
+                    89E25003191E85FFE47CA99D9A0AD1740A684D25F72BF1D2311F923272D8F450
+                    DFD0BE0F9BEC111E142097F9F3AE43E860F9B0F56822FCECD32F70CEE7613F2A
+                    0C3E781147BEDD7B16D4C96DD7E568A45EB2A051A4C5654B6C7DA99D1C3405B4
+                    A69A5A3364DD2EC2C54C365CCCCAC708512EDE4FE0A1B8B9544EC1342F2E562E
+                    9390721D7EFAF14EF8FBE144A894C27E6438FCFA074BD0F83EAAC733E1935C4F
+                    374400FA008A463A199D199E32EDD1FC602D8438740A684B15553590839732E7
+                    AEE5C2E5EC7CB85552CEBEA820ADB4D9BC6C87EFCD9B0683FA8437292B89F27F
+                    F3F25266FCD6A0B3CBC789590E07ED8C235D0CF3F4CADAD00E6123B517A29B8F
+                    F8E816662E2EDECE67DE80E4EB79EC26C79D72BAA4C49D76F4DB9797C15C8C04
+                    3EB82AA7FBE0F44A69CA0FF041E3AB1CA3149DDBF62549CA502FD7599163D169
+                    E9FB97B49823513D146DD4CAB72A0721782E58E1C0D3779DBB5FFC077BA56F2B
+                    D1D756050DBFBC7A25FB26FCE4A3CFD9F6B82103E0773FFC2EDBEE3CD495020B
+                    ED2CA561CF462E5DC9B7B4C3BCFFBFBB770A689738B44903479A2FD920621243
+                    386E89053B021E678B001D5D04F2A983CE8112DB25B68F9A43D214E9A45A0AD1
+                    CD14600F6AA69A58A7334973AAEDF249CC47C3B072625952F307DB8F05CC78B9
+                    4A6279AC9C780C7BE5DBD22B1958AC47AC974475505947CA51B84004E8B8E491
+                    49239B5DE2898695A287A47BB8083D9F910B1771CD9175EB2ECB13CB89C7B057
+                    BE2DBD8A6ED10DC2BA3517E2F4CBC00ECBD138AB9EAEA2EC13AD84E83E02A864
+                    692A694399A747A9667655CC010CDC1A97B90A700CCEACAB8B28DBA995103777
+                    00C499757505653BB512E2B297815AA8396A65F42247A1FF0880FF1C2B7C2251
+                    42CED3A3F0496B21EE7D19E8CCBABA4AF3B66A21C469DF07E8ACD473B593DA96
+                    1EA59EDB55B9FD22D099757511653BB512E2DE5300E1CCBABA82B29D5A09D1FD
+                    1470BFB21A5F1D89B23E7D22F681B29D5AC90522C0477B0EAB462FAD24D7452F
+                    8A7C3DE96AF64DDCE0EDD45288EED700EB36EF81ED874F89ADD51AACA2497D3A
+                    E56A565ED3766A2544F75300E9CDF51BE0A3DD8754F76927422DBFFBB5618FA3
+                    DEBB2B2C02B9D6FECF5698BF722D9CBE7C4D6D77A7256DB041A1C8D78B3EDA7D
+                    186E1616ABEFECAA10C173FAF7F9A6EB101D150ECF3C3203460F8981A0005F9E
+                    DB71B61F3A053B50C4F4712361C71FDE66DB7A81DAF7D6BA0D3CA53DE6D39BD1
+                    01A6B99E033882E9E3F5E500EB71EDB37ED31E9E720CE684CDAEB106708A700E
+                    50AE8FBA4BDB0F9E8469CB7F8CC6DFADDE4E4DE50257014E5537918F73FCDAFF
+                    DA02A397BC0E6F7DF831A68BD4DBA7B5109759043A454EE6C0A9647865EDBFC3
+                    F4E56B60C3AE83E20D1FB576394A88E039F559BEE9DE44474540C2A60F79CA71
+                    909129CC93C1F3EFE048EF46CC67B6A2034C311C4022EFD0677C4B7B52AEE7C1
+                    2768F403A7CEC3FD2A47DFDE6E1FE6247280C9DF351C80F3F1FBAB61FE7726F2
+                    9436EC38780276E2884FB894C673F483F9EC367280670C07E04C1F1F0B9F7FF8
+                    0E4F751E0AED3B28CC7FB15F37A35D0DF3D9CFD10126190EA064DDDBAFC2B2F9
+                    F13CD5311271946FF8F2001CC430EF0A98CF91034C7CDA70000541FE7EB0ED4F
+                    3F87D14307F29CD6A145DD8E0327E0131CEDDDBDA8EB28E6F3DB0D07B0C79B2F
+                    2E81D5CB97F0544B52B26EA0D171B49F3CA7EB30DF1AA2034C586638801DE8D2
+                    70C1CC49307FE6649E8361FE621A1C40A3A7A203B83AE6E41DE800714B0D0770
+                    53CC1776D2670106EE8C49F0F404D5FBC4867ABEC8013C7C7D31815B86DC4F08
+                    77004C19723F9103784746B00D03F7C4E43B3046DD3B0CF57C910378C744ABEF
+                    34D4B3C53199BCBCC0BB7F3F9E3470177CFB893637D12F6F064F8C53F712433D
+                    5641E3C7890E40BFA7E73762384681FEB803730CF578F9F4E90B01C3C4BFA42E
+                    DF098C58B4004CECCFA9A81C61A8C7C8E4ED05910B17E0B6089B02489EC14110
+                    B9F87131B759B830D44384443DB1083C03033029A69B7C16E0337000843E3417
+                    0B63C2508F53D89CD9E04B53BD029B03B09F61172068CA04089D3F8F361195B3
+                    18723DA12DC3E6CE86605CF8D972C59FDD6FF1692065074F9E007DBEF70CCE17
+                    CDFECA96219793C9DB07FA3DBD1482E2C6B35F3C57EE2684111B8F48DB60E551
+                    8076D31C61A9AC82D223C7A1F2F255B6DFC0B5081C3B06C2E26780879F1F1A5F
+                    FCC12D429CFE05B8BEE2618503A0F1C9439803B012B25F406D4121941D3D0EB5
+                    D9B93CC740CFF80D1E0CA1B366827784ED731EB2A6685FC9014074001CE9364B
+                    1BB81900FF0F7C5B30AA6F2EC24C0000000049454E44AE426082}
+                  FileName = 'E:\Delphi\images\113405\18.png'
+                end>
+              Align = Left
+              HitTest = False
+              Margins.Left = 5.000000000000000000
+              Margins.Top = 5.000000000000000000
+              Margins.Right = 5.000000000000000000
+              Margins.Bottom = 5.000000000000000000
+              Position.X = 5.000000000000000000
+              Position.Y = 5.000000000000000000
+              Size.Width = 64.000000000000000000
+              Size.Height = 54.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object Label24: TLabel
+              Align = Client
+              StyledSettings = [Family, Style, FontColor]
+              Size.Width = 166.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'labelstyle'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.HorzAlign = Center
+              Text = #1042#1099#1093#1086#1076
+              TabOrder = 1
+            end
+          end
         end
       end
     end
@@ -1212,13 +1425,13 @@ object Form11: TForm11
       object Layout3: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout27: TLayout
           Align = Left
           Size.Width = 441.000000000000000000
-          Size.Height = 304.000000000000000000
+          Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object Panel1: TPanel
@@ -1228,7 +1441,7 @@ object Form11: TForm11
             Margins.Right = 4.000000000000000000
             Margins.Bottom = 4.000000000000000000
             Size.Width = 433.000000000000000000
-            Size.Height = 296.000000000000000000
+            Size.Height = 204.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'panelstyle'
             TabOrder = 0
@@ -2726,7 +2939,7 @@ object Form11: TForm11
       object Layout15: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout16: TLayout
@@ -2742,7 +2955,6 @@ object Form11: TForm11
           Size.Width = 640.000000000000000000
           Size.Height = 17.000000000000000000
           Size.PlatformDefault = False
-          Text = #1042#1083#1072#1076#1080#1084#1080#1088
           TabOrder = 1
         end
         object Panel6: TPanel
@@ -2752,7 +2964,7 @@ object Form11: TForm11
           Margins.Right = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Size.Width = 632.000000000000000000
-          Size.Height = 229.000000000000000000
+          Size.Height = 137.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           object ListView1: TListView
@@ -2762,7 +2974,7 @@ object Form11: TForm11
             FooterAppearanceClassName = 'TListHeaderObjects'
             Align = Client
             Size.Width = 632.000000000000000000
-            Size.Height = 229.000000000000000000
+            Size.Height = 137.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
             StyleLookup = 'listviewstyle'
@@ -2775,7 +2987,7 @@ object Form11: TForm11
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 82.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -2787,7 +2999,7 @@ object Form11: TForm11
       object Layout17: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout18: TLayout
@@ -2809,7 +3021,7 @@ object Form11: TForm11
             TabOrder = 0
             object Layout20: TLayout
               Align = Left
-              Size.Width = 200.000000000000000000
+              Size.Width = 180.000000000000000000
               Size.Height = 81.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
@@ -2821,10 +3033,9 @@ object Form11: TForm11
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
                 Position.Y = 26.000000000000000000
-                Size.Width = 192.000000000000000000
+                Size.Width = 172.000000000000000000
                 Size.Height = 20.000000000000000000
                 Size.PlatformDefault = False
-                Text = #1042#1083#1072#1076#1080#1084#1080#1088
                 TabOrder = 2
               end
               object LabelPatientCardLastName: TLabel
@@ -2835,10 +3046,9 @@ object Form11: TForm11
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
                 Position.Y = 2.000000000000000000
-                Size.Width = 192.000000000000000000
+                Size.Width = 172.000000000000000000
                 Size.Height = 20.000000000000000000
                 Size.PlatformDefault = False
-                Text = #1057#1077#1088#1075#1080#1077#1074#1089#1082#1080#1081
                 TabOrder = 0
               end
               object LabelPatientCardMiddleName: TLabel
@@ -2849,59 +3059,61 @@ object Form11: TForm11
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
                 Position.Y = 50.000000000000000000
-                Size.Width = 192.000000000000000000
+                Size.Width = 172.000000000000000000
                 Size.Height = 20.000000000000000000
                 Size.PlatformDefault = False
-                Text = #1043#1077#1085#1085#1072#1076#1100#1077#1074#1080#1095
                 TabOrder = 1
               end
             end
             object Layout23: TLayout
               Align = Client
-              Size.Width = 378.000000000000000000
+              Size.Width = 398.000000000000000000
               Size.Height = 81.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
               object LabelPatientCardPhone1: TLabel
                 Align = Top
+                StyledSettings = [Family, Style, FontColor]
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 2.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
                 Position.Y = 2.000000000000000000
-                Size.Width = 370.000000000000000000
+                Size.Width = 390.000000000000000000
                 Size.Height = 20.000000000000000000
                 Size.PlatformDefault = False
-                Text = '79138585452'
+                TextSettings.Font.Size = 11.000000000000000000
                 TabOrder = 2
               end
               object LabelPatientCardEmail: TLabel
                 Align = Top
+                StyledSettings = [Family, Style, FontColor]
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 2.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
                 Position.Y = 26.000000000000000000
-                Size.Width = 370.000000000000000000
-                Size.Height = 20.000000000000000000
+                Size.Width = 390.000000000000000000
+                Size.Height = 24.000000000000000000
                 Size.PlatformDefault = False
-                Text = 'vldsrg@mail.ru'
+                TextSettings.Font.Size = 11.000000000000000000
                 TabOrder = 1
               end
               object LabelPatientCardBirthday: TLabel
                 Align = Top
+                StyledSettings = [Family, Style, FontColor]
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 2.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 2.000000000000000000
                 Position.X = 4.000000000000000000
-                Position.Y = 50.000000000000000000
-                Size.Width = 370.000000000000000000
+                Position.Y = 54.000000000000000000
+                Size.Width = 390.000000000000000000
                 Size.Height = 20.000000000000000000
                 Size.PlatformDefault = False
-                Text = '17.09.2021'
+                TextSettings.Font.Size = 11.000000000000000000
                 TabOrder = 0
               end
             end
@@ -2911,7 +3123,7 @@ object Form11: TForm11
               Size.Width = 54.000000000000000000
               Size.Height = 81.000000000000000000
               Size.PlatformDefault = False
-              TabOrder = 4
+              TabOrder = 3
               object Panel7: TPanel
                 Align = Left
                 Margins.Left = 2.000000000000000000
@@ -2924,7 +3136,7 @@ object Form11: TForm11
                 Size.Height = 77.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 4
-                OnClick = DownButtonBackClick
+                OnClick = Panel7Click
                 object Image6: TImage
                   MultiResBitmap.Height = 128
                   MultiResBitmap.Width = 128
@@ -3121,7 +3333,7 @@ object Form11: TForm11
         object Layout19: TLayout
           Align = Client
           Size.Width = 640.000000000000000000
-          Size.Height = 215.000000000000000000
+          Size.Height = 123.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object TabControlPatienCard: TTabControl
@@ -3131,18 +3343,18 @@ object Form11: TForm11
             Margins.Right = 4.000000000000000000
             Margins.Bottom = 4.000000000000000000
             Size.Width = 632.000000000000000000
-            Size.Height = 207.000000000000000000
+            Size.Height = 115.000000000000000000
             Size.PlatformDefault = False
             TabIndex = 0
             TabOrder = 0
             TabPosition = PlatformDefault
             Sizes = (
               632s
-              181s
+              89s
               632s
-              181s
+              89s
               632s
-              181s)
+              89s)
             object History: TTabItem
               CustomIcon.Height = 128
               CustomIcon.Width = 128
@@ -3166,7 +3378,7 @@ object Form11: TForm11
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
                 Size.Width = 624.000000000000000000
-                Size.Height = 173.000000000000000000
+                Size.Height = 81.000000000000000000
                 Size.PlatformDefault = False
                 StyleLookup = 'panelstyle'
                 TabOrder = 0
@@ -3181,7 +3393,7 @@ object Form11: TForm11
                   Margins.Right = 4.000000000000000000
                   Margins.Bottom = 4.000000000000000000
                   Size.Width = 616.000000000000000000
-                  Size.Height = 165.000000000000000000
+                  Size.Height = 73.000000000000000000
                   Size.PlatformDefault = False
                   TabOrder = 0
                 end
@@ -3235,7 +3447,7 @@ object Form11: TForm11
       object Layout21: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
       end
@@ -3256,13 +3468,13 @@ object Form11: TForm11
       object Layout9: TLayout
         Align = Client
         Size.Width = 640.000000000000000000
-        Size.Height = 304.000000000000000000
+        Size.Height = 212.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Layout24: TLayout
           Align = Left
           Size.Width = 233.000000000000000000
-          Size.Height = 304.000000000000000000
+          Size.Height = 212.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object Panel5: TPanel
@@ -3272,16 +3484,11 @@ object Form11: TForm11
             Margins.Right = 4.000000000000000000
             Margins.Bottom = 4.000000000000000000
             Size.Width = 225.000000000000000000
-            Size.Height = 296.000000000000000000
+            Size.Height = 204.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
             object ComboBox1: TComboBox
               Align = Top
-              Items.Strings = (
-                #1074#1093#1086#1076#1103#1097#1080#1081' '#1079#1074#1086#1085#1086#1082
-                #1080#1089#1093#1086#1076#1103#1097#1080#1081' '#1079#1074#1086#1085#1086#1082
-                #1082#1086#1085#1089#1091#1083#1100#1090#1072#1094#1080#1103
-                #1076#1080#1072#1075#1085#1086#1089#1090#1080#1082#1072)
               Margins.Left = 8.000000000000000000
               Margins.Top = 4.000000000000000000
               Margins.Right = 8.000000000000000000
@@ -3302,7 +3509,7 @@ object Form11: TForm11
               Margins.Right = 8.000000000000000000
               Margins.Bottom = 4.000000000000000000
               Position.X = 8.000000000000000000
-              Position.Y = 260.000000000000000000
+              Position.Y = 168.000000000000000000
               Size.Width = 209.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
@@ -3346,7 +3553,7 @@ object Form11: TForm11
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
               Position.X = 4.000000000000000000
-              Position.Y = 232.000000000000000000
+              Position.Y = 140.000000000000000000
               Size.Width = 217.000000000000000000
               Size.Height = 20.000000000000000000
               Size.PlatformDefault = False
@@ -3363,12 +3570,11 @@ object Form11: TForm11
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
               Size.Width = 217.000000000000000000
-              Size.Height = 76.000000000000000000
               Size.PlatformDefault = False
               StyleLookup = 'memostyle'
               TabOrder = 5
-              Viewport.Width = 213.000000000000000000
-              Viewport.Height = 72.000000000000000000
+              Viewport.Width = 217.000000000000000000
+              Viewport.Height = 0.000000000000000000
             end
           end
         end
@@ -3378,7 +3584,7 @@ object Form11: TForm11
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 72.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
@@ -5397,7 +5603,7 @@ object Form11: TForm11
     end
   end
   object StatusBarBottom: TStatusBar
-    Position.Y = 462.000000000000000000
+    Position.Y = 370.000000000000000000
     ShowSizeGrip = True
     Size.Width = 640.000000000000000000
     Size.Height = 22.000000000000000000
@@ -5431,7 +5637,7 @@ object Form11: TForm11
   end
   object PanelKeyboard: TPanel
     Align = Bottom
-    Position.Y = 484.000000000000000000
+    Position.Y = 392.000000000000000000
     Size.Width = 640.000000000000000000
     Size.Height = 4.000000000000000000
     Size.PlatformDefault = False
@@ -49897,7 +50103,7 @@ object Form11: TForm11
   end
   object Layout25: TLayout
     Align = Bottom
-    Position.Y = 389.000000000000000000
+    Position.Y = 297.000000000000000000
     Size.Width = 640.000000000000000000
     Size.Height = 73.000000000000000000
     Size.PlatformDefault = False
@@ -50760,7 +50966,6 @@ object Form11: TForm11
           Size.Height = 61.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          OnClick = DownButtonEditPatientClick
           object Image14: TImage
             MultiResBitmap.Height = 128
             MultiResBitmap.Width = 128
@@ -51022,18 +51227,6 @@ object Form11: TForm11
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
-    object LinkFillControlToField6: TLinkFillControlToField
-      Category = 'Quick Bindings'
-      Control = ListView2
-      Track = True
-      FillDataSource = BindSourceDB2
-      FillDisplayFieldName = 'EventComments'
-      AutoFill = True
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillHeaderFieldName = 'EventDate'
-      FillBreakGroups = <>
-    end
     object LinkPropertyToFieldText2: TLinkPropertyToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -51086,6 +51279,18 @@ object Form11: TForm11
       FieldName = 'BirthdayDate'
       Component = LabelPatientCardBirthday
       ComponentProperty = 'Text'
+    end
+    object LinkFillControlToField4: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = ListView2
+      Track = True
+      FillDataSource = BindSourceDB2
+      FillDisplayFieldName = 'EventComments'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'EventDate'
+      FillBreakGroups = <>
     end
   end
   object FDGUIxWaitCursor1: TFDGUIxWaitCursor
