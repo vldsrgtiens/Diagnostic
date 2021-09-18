@@ -76,15 +76,14 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\libDiagnostic.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Diagnostic\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libDiagnostic.so</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Diagnostic\res\drawable-large\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage640</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
-            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Diagnostic\res\drawable-normal\</RemoteDir>
@@ -113,7 +112,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Diagnostic\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <DeployClass>ProjectAndroidManifest</DeployClass>
@@ -122,14 +121,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Diagnostic\res\drawable-large\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage640</DeployClass>
+        <DeployFile Include="Android\libDiagnostic.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Diagnostic\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libDiagnostic.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
+            <Required>True</Required>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Diagnostic\res\drawable-xhdpi\</RemoteDir>
@@ -185,7 +185,7 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\splash_image_def.xml" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\splash_image_def.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Diagnostic\res\drawable\</RemoteDir>
             <RemoteName>splash_image_def.xml</RemoteName>
             <DeployClass>AndroidSplashImageDef</DeployClass>
@@ -194,10 +194,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\styles.xml" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="Android\styles.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Diagnostic\res\values\</RemoteDir>
             <RemoteName>styles.xml</RemoteName>
             <DeployClass>AndroidSplashStyles</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\classes.dex" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Diagnostic\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

@@ -72,7 +72,7 @@ type
     Image4: TImage;
     Layout13: TLayout;
     Label9: TLabel;
-    EditPhoneEmail: TEdit;
+    EditEmail: TEdit;
     Image5: TImage;
     Layout14: TLayout;
     Label10: TLabel;
@@ -89,13 +89,12 @@ type
     History: TTabItem;
     TabItem2: TTabItem;
     TabItem3: TTabItem;
-    Image6: TImage;
     Layout20: TLayout;
     LabelPatientCardFirstName: TLabel;
     LabelPatientCardLastName: TLabel;
     LabelPatientCardMiddleName: TLabel;
     Image8: TImage;
-    ButtonSettings: TCornerButton;
+    ButtonEventsList: TCornerButton;
     Image9: TImage;
     Label11: TLabel;
     Settings: TTabItem;
@@ -116,21 +115,15 @@ type
     Label13: TLabel;
     LinkPropertyToFieldText: TLinkPropertyToField;
     LinkFillControlToField3: TLinkFillControlToField;
-    Layout23: TLayout;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
     ListView2: TListView;
     BindSourceDB2: TBindSourceDB;
     LinkFillControlToField6: TLinkFillControlToField;
     DateEditBirthdayDate: TDateEdit;
-    LinkControlToFieldBirthdayDate: TLinkControlToField;
     LabelPatientCardPhone1: TLabel;
     LinkPropertyToFieldText2: TLinkPropertyToField;
     LinkPropertyToFieldText3: TLinkPropertyToField;
     LinkPropertyToFieldText4: TLinkPropertyToField;
     LinkPropertyToFieldText5: TLinkPropertyToField;
-    SpeedButton2: TSpeedButton;
     NewEvent: TTabItem;
     Layout9: TLayout;
     LabelToolBar: TLabel;
@@ -139,8 +132,6 @@ type
     Layout24: TLayout;
     Layout25: TLayout;
     Label17: TLabel;
-    BindSourceDB3: TBindSourceDB;
-    LinkFillControlToField2: TLinkFillControlToField;
     Label18: TLabel;
     Memo1: TMemo;
     Label20: TLabel;
@@ -151,15 +142,52 @@ type
     Layout26: TLayout;
     Layout27: TLayout;
     DownButtonBack: TImage;
-    CornerButton1: TCornerButton;
+    ButtonSettings: TCornerButton;
     Image12: TImage;
     Label19: TLabel;
     SpeedButton1: TSpeedButton;
+    EventsList: TTabItem;
+    ImagePage: TImage;
+    ImageZeroPatientCard: TImage;
+    ImageZeroNewPatient: TImage;
+    ImageZeroPatientsList: TImage;
+    ImageZeroSettings: TImage;
+    ImageZeroNewEvent: TImage;
+    ImageZeriEventsList: TImage;
+    ImageZeroHome: TImage;
+    PanelZeroImages: TPanel;
+    temp: TTabItem;
+    ImageZeroAuthorization: TImage;
+    Panel6: TPanel;
+    BindSourceDB3: TBindSourceDB;
+    DownPanelBack: TPanel;
+    Label14: TLabel;
+    DownPanelOk: TPanel;
     Image7: TImage;
+    Label15: TLabel;
+    DownPanelSave: TPanel;
+    Image11: TImage;
+    Label16: TLabel;
+    DownPanelCreate: TPanel;
+    Image13: TImage;
+    Label21: TLabel;
+    DownPanelEdit: TPanel;
+    Image14: TImage;
+    Label22: TLabel;
+    LinkFillControlToField2: TLinkFillControlToField;
+    Layout23: TLayout;
+    LabelPatientCardEmail: TLabel;
+    LinkPropertyToFieldText6: TLinkPropertyToField;
+    LabelPatientCardBirthday: TLabel;
+    LinkPropertyToFieldText7: TLinkPropertyToField;
+    Layout28: TLayout;
+    Panel7: TPanel;
+    Image6: TImage;
+    Label23: TLabel;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
-    procedure ButtonSettingsClick(Sender: TObject);
+    procedure ButtonEventsListClick(Sender: TObject);
     procedure Image8Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListView1ItemClick(const Sender: TObject;
@@ -170,15 +198,24 @@ type
     procedure DownButtonBackResize(Sender: TObject);
     procedure DownButtonBackClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure ButtonSettingsClick(Sender: TObject);
+    procedure ImagePageResize(Sender: TObject);
+    procedure TabControl1Change(Sender: TObject);
+    procedure DownButtonSaveNewPatientClick(Sender: TObject);
+    procedure DownButtonEditPatientClick(Sender: TObject);
+    procedure DownPanelOkClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure TabControlChange;
+    function CheckNewOrEditPatient(): boolean;
+    procedure BeforEditPatient;
   end;
 
 var
   Form11: TForm11;
+  NewOrEditPatient: boolean=true;
   //Disp: JDisplayMetrics;
   sScale,scale: Single;
   OSPlatform: string;
@@ -194,12 +231,76 @@ implementation
 
 procedure TForm11.ButtonNewPatientClick(Sender: TObject);
 begin
+ NewOrEditPatient:=true;
  TabControl1.SetActiveTabWithTransition(NewPatient, TTabTransition.Slide,  TTabTransitionDirection.Normal);
 end;
 
 procedure TForm11.ButtonSettingsClick(Sender: TObject);
 begin
  TabControl1.SetActiveTabWithTransition(Settings, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+end;
+
+procedure TForm11.BeforEditPatient;
+begin
+ EditFirstName.Text:=DataModule1.FDQueryPatients.FieldByName('FirstName').AsString;
+ EditMiddleName.Text:=DataModule1.FDQueryPatients.FieldByName('MiddleName').AsString;
+ EditLastName.Text:=DataModule1.FDQueryPatients.FieldByName('LastName').AsString;
+ Switch1.IsChecked:=DataModule1.FDQueryPatients.FieldByName('Gender').AsBoolean;
+ DateEditBirthdayDate.Date:=DataModule1.FDQueryPatients.FieldByName('BirthdayDate').AsDateTime;
+ EditPhone1.Text:=DataModule1.FDQueryPatients.FieldByName('Phone1').AsString;
+ EditPhone2.Text:=DataModule1.FDQueryPatients.FieldByName('Phone2').AsString;
+ EditEmail.Text:=DataModule1.FDQueryPatients.FieldByName('Email').AsString;
+end;
+
+procedure TForm11.ButtonEventsListClick(Sender: TObject);
+begin
+ TabControl1.SetActiveTabWithTransition(EventsList, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+end;
+
+function TForm11.CheckNewOrEditPatient(): boolean;
+begin
+ Result:=false;
+ try
+    begin
+     if (Trim(EditLastName.Text)='') or (Trim(EditFirstName.Text)='') or (Trim(EditMiddleName.Text)='') or (Trim(EditPhone1.Text)='')
+     then
+      begin
+       ShowMessage('Не все пола заполнены');
+       Exit;
+      end;
+
+      begin
+       DataModule1.FDQueryPatients.Edit;
+       if NewOrEditPatient then DataModule1.FDQueryPatients.Insert;
+       DataModule1.FDQueryPatients.FieldByName('FirstName').AsString:=EditFirstName.Text;
+       DataModule1.FDQueryPatients.FieldByName('MiddleName').AsString:=EditMiddleName.Text;
+       DataModule1.FDQueryPatients.FieldByName('LastName').AsString:=EditLastName.Text;
+       DataModule1.FDQueryPatients.FieldByName('FullName').AsString:=EditLastName.Text+' '+EditFirstName.Text+' '+EditMiddleName.Text;
+       DataModule1.FDQueryPatients.FieldByName('Gender').AsBoolean:=Switch1.IsChecked;
+       DataModule1.FDQueryPatients.FieldByName('BirthdayDate').AsDateTime:=DateEditBirthdayDate.Date;
+       DataModule1.FDQueryPatients.FieldByName('Phone1').AsString:=EditPhone1.Text;
+       DataModule1.FDQueryPatients.FieldByName('Phone2').AsString:=EditPhone2.Text;
+       DataModule1.FDQueryPatients.FieldByName('Email').AsString:=EditEmail.Text;
+      end;
+    end;
+  DataModule1.FDQueryPatients.Post;
+  Result:=true;
+
+ except on e:Exception do
+  ShowMessage(e.Message);
+ end;
+
+ EditFirstName.Text:='';
+ EditMiddleName.Text:='';
+ EditLastName.Text:='';
+ DateEditBirthdayDate.Date:= Now;
+ EditPhone1.Text:='';
+ EditPhone2.Text:='';
+ EditEmail.Text:='';
+
+ DataModule1.FDQueryPatients.Active:=false;
+ ListView1.Items.Clear;
+ DataModule1.FDQueryPatients.Active:=true;
 end;
 
 procedure TForm11.CornerButton2Click(Sender: TObject);
@@ -214,6 +315,10 @@ end;
 
 procedure TForm11.FormCreate(Sender: TObject);
 begin
+ PanelZeroImages.Visible:=false;
+ NewOrEditPatient:=true;
+ TabControl1.ActiveTab:=Home;
+
  {$IFDEF ANDROID}
   DataModule1.FDConnection1.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'diagnostic.db') ;//'$(DOC)/diagnostic.db';
   //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Внутренний доступ}
@@ -237,7 +342,7 @@ begin
     begin
      LabelStatusDB.Text:= 'Not Connected';
     end;
-
+   TabControlChange;
 end;
 
 procedure TForm11.FormResize(Sender: TObject);
@@ -259,9 +364,7 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
       Layout24.Align:= TAlignLayout.Left;
       Layout24.Align:= TAlignLayout.Center;
       Layout24.Width:=sScreenSize.X div 4;
-      Layout26.Align:= TAlignLayout.Left;
-      Layout26.Align:= TAlignLayout.Center;
-      Layout26.Width:=sScreenSize.X div 4;
+
       Layout27.Align:= TAlignLayout.Left;
       Layout27.Align:= TAlignLayout.Center;
       Layout27.Width:=sScreenSize.X div 4;
@@ -271,8 +374,7 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
       OSPlatform := 'Android';
       Layout24.Align:= TAlignLayout.Client;
       Layout24.Width:=sScreenSize.X;
-      Layout26.Align:= TAlignLayout.Client;
-      Layout26.Width:=sScreenSize.X;
+
       Layout27.Align:= TAlignLayout.Client;
       Layout27.Width:=sScreenSize.X;
     end;
@@ -281,8 +383,7 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
       OSPlatform := 'UNKNOWN';
       Layout24.Align:= TAlignLayout.Center;
       Layout24.Width:=sScreenSize.X div 4;
-      Layout26.Align:= TAlignLayout.Center;
-      Layout26.Width:=sScreenSize.X div 4;
+
       Layout27.Align:= TAlignLayout.Center;
       Layout27.Width:=sScreenSize.X div 4;
      end;
@@ -292,32 +393,32 @@ end;
 procedure TForm11.DownButtonBackClick(Sender: TObject);
 begin
   case TabControl1.ActiveTab.Index of
-   0:begin
-      LabelToolBar.Text:='Authorization';
+   0:begin //Authorization
       TabControl1.SetActiveTabWithTransition(Authorization, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
    end;
-   1:begin
-      LabelToolBar.Text:='Home';
+   1:begin //Home
       TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
    end;
-   2:begin
-      LabelToolBar.Text:='Новый пациент';
-      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
-   end;
-   3:begin
-      LabelToolBar.Text:='Список пациентов';
-      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
-   end;
-   4:begin
-      LabelToolBar.Text:='Карточка пациента';
+   2:begin //NewPatient
       TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
    end;
-   5:begin
-      LabelToolBar.Text:='Настройки';
+   3:begin //PatientsList
       TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
    end;
-   6:begin
-      LabelToolBar.Text:='Новое событие';
+   4:begin //PatientCard
+      TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   5:begin //Settings
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   6:begin //NewEvent
+      TabControl1.SetActiveTabWithTransition(PatientCard, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   7:begin //EventsList
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+   end;
+   8:begin //EditPatient
+      TabControl1.SetActiveTabWithTransition(Home, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
    end;
   end;
 end;
@@ -325,6 +426,39 @@ end;
 procedure TForm11.DownButtonBackResize(Sender: TObject);
 begin
  Self.Width:=Self.Height;
+end;
+
+procedure TForm11.DownButtonSaveNewPatientClick(Sender: TObject);
+begin
+ if CheckNewOrEditPatient then
+  DownButtonBackClick(sender);
+end;
+
+procedure TForm11.DownPanelOkClick(Sender: TObject);
+begin
+ if (TabControl1.ActiveTab=PatientsList) and( ListView1.ItemIndex>=0)then
+  begin
+   TabControl1.SetActiveTabWithTransition(PatientCard, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+  end
+end;
+
+procedure TForm11.ImagePageResize(Sender: TObject);
+begin
+ ImagePage.Width:=ImagePage.Height;
+end;
+
+procedure TForm11.DownButtonEditPatientClick(Sender: TObject);
+begin
+ if TabControl1.ActiveTab=PatientCard then
+  begin
+   NewOrEditPatient:=false;
+   BeforEditPatient;
+  end
+ else
+  NewOrEditPatient:=true;
+
+ TabControl1.SetActiveTabWithTransition(NewPatient, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+
 end;
 
 procedure TForm11.Image8Click(Sender: TObject);
@@ -336,11 +470,11 @@ procedure TForm11.ListView1ItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   DataModule1.FDQueryPatients.Locate('FullName',AItem.Text,[loPartialKey]);
-  Label16.Text:='кол-во записей: '+IntToStr(DataModule1.FDQueryEvents.RecordCount);
 
   DataModule1.FDQueryEvents.Active:=false;
   ListView2.Items.Clear;
   DataModule1.FDQueryEvents.Active:=true;
+  DownPanelOk.Enabled:=true;
 end;
 
 procedure TForm11.SpeedButton1Click(Sender: TObject);
@@ -367,9 +501,87 @@ begin
 
 end;
 
+procedure TForm11.TabControl1Change(Sender: TObject);
+begin
+TabControlChange;
+end;
+
 procedure TForm11.TabControlChange;
 begin
-
+ case TabControl1.ActiveTab.Index of
+  0: begin
+   LabelToolBar.Text:='Authorization';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroAuthorization.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=false;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+  1: begin
+   LabelToolBar.Text:='Начальная страница';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroHome.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=false;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+  2: begin
+   LabelToolBar.Text:='Добавления пациента';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroNewPatient.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=true;
+   DownPanelOk.Enabled:=false;
+  end;
+  3: begin
+   LabelToolBar.Text:='Список пациентов';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroPatientsList.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+  4: begin
+   LabelToolBar.Text:='Карточка пациента';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroPatientCard.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=true;
+   DownPanelCreate.Enabled:=true;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+  5: begin
+   LabelToolBar.Text:='Настройки';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroSettings.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+  6: begin
+   LabelToolBar.Text:='Создать напоминание';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeroNewEvent.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=false;
+   DownPanelCreate.Enabled:=false;
+   DownPanelSave.Enabled:=true;
+   DownPanelOk.Enabled:=false;
+  end;
+  7: begin
+   LabelToolBar.Text:='Список напоминаний';
+   ImagePage.MultiResBitmap.Bitmaps[1].Assign(ImageZeriEventsList.MultiResBitmap.Bitmaps[1]);
+   DownPanelBack.Enabled:=true;
+   DownPanelEdit.Enabled:=true;
+   DownPanelCreate.Enabled:=true;
+   DownPanelSave.Enabled:=false;
+   DownPanelOk.Enabled:=false;
+  end;
+ end;
 end;
 
 end.

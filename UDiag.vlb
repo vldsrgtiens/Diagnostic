@@ -19,9 +19,6 @@ Coordinates=713,945,59,33
 [Panel4]
 Coordinates=1558,945,47,33
 
-[ButtonSettings]
-Coordinates=1134,886,88,33
-
 [Image5]
 Coordinates=241,809,49,51
 
@@ -103,9 +100,6 @@ Visible=True
 
 [Layout13]
 Coordinates=784,886,59,33
-
-[EditPhoneEmail]
-Coordinates=10,732,92,51
 
 [Label5]
 Coordinates=463,809,46,51
@@ -207,9 +201,6 @@ Coordinates=549,945,53,33
 [TabControlPatienCard]
 Coordinates=1660,809,123,33
 
-[Image6]
-Coordinates=316,809,49,51
-
 [Layout14]
 Coordinates=1309,945,59,33
 Visible=True
@@ -230,7 +221,7 @@ Coordinates=671,732,55,51
 Coordinates=170,945,59,33
 
 []
-Coordinates=613,809,84,51
+Coordinates=316,809,57,58
 Visible=True
 
 [Module Settings]
@@ -258,7 +249,7 @@ Visible=False
 Coordinates=452,556,178,33
 
 [DataModule1.DataSourceEvents]
-Coordinates=894,10,172,141
+Coordinates=894,10,172,51
 Visible=True
 
 [DataModule1.FDQueryEvents]
@@ -282,20 +273,6 @@ Visible=True
 Coordinates=10,333,52,51
 Visible=True
 
-[Label14]
-Coordinates=535,809,52,51
-Visible=True
-
-[Label15]
-Coordinates=163,809,52,51
-Visible=True
-
-[Layout23]
-Coordinates=628,945,59,33
-
-[Label16]
-Coordinates=1110,809,52,51
-
 [ListView2]
 Coordinates=556,19,89,141
 Visible=True
@@ -310,9 +287,6 @@ Coordinates=390,10,120,51
 [LabelPatientCardPhone1]
 Coordinates=382,121,136,51
 
-[SpeedButton2]
-Coordinates=1458,732,84,51
-
 [History]
 Coordinates=95,945,49,33
 
@@ -321,7 +295,7 @@ Coordinates=1342,809,59,33
 Visible=True
 
 [DataModule1.FDQueryTypeEvent]
-Coordinates=1202,10,176,33
+Coordinates=1388,20,176,33
 Visible=False
 
 [Layout25]
@@ -334,7 +308,8 @@ Coordinates=1263,809,53,33
 Coordinates=752,732,80,51
 
 [ComboBox1]
-Coordinates=1092,10,84,123
+Coordinates=1150,0,84,123
+Visible=True
 
 [LabelStatusDB]
 Coordinates=997,809,87,51
@@ -348,6 +323,145 @@ Coordinates=1135,945,63,33
 [DataModule1.DataSourceTypeEvent]
 Coordinates=25,62,190,33
 
+[ButtonEventsList]
+Coordinates=1134,886,99,33
+
+[EditEmail]
+Coordinates=10,732,61,51
+
+[Label20]
+Coordinates=11,158,52,51
+
+[SpeedButton1]
+Coordinates=268,158,84,51
+
+[ButtonSettings]
+Coordinates=43,254,88,33
+
+[Panel2]
+Coordinates=290,10,47,33
+
+[Layout27]
+Coordinates=701,153,59,33
+
+[DownButtonBack]
+Coordinates=80,158,100,51
+
+[Memo1]
+Coordinates=287,78,49,51
+
+[Memo2]
+Coordinates=0,0,49,51
+
+[Panel5]
+Coordinates=701,208,47,33
+
+[Image12]
+Coordinates=199,158,55,51
+
+[Label19]
+Coordinates=578,206,52,51
+
+[DateEdit1]
+Coordinates=155,1,115,51
+
+[Layout26]
+Coordinates=701,263,59,33
+
+[Label18]
+Coordinates=76,1,52,51
+
 [BindSourceDB3]
-Coordinates=1202,10,161,105
+Coordinates=1388,20,161,105
+
+[Image13]
+Coordinates=647,640,55,51
+
+[Label14]
+Coordinates=0,431,52,51
+
+[DownPanelCreate]
+Coordinates=805,585,101,33
+
+[DownPanelBack]
+Coordinates=696,585,94,33
+
+[Image11]
+Coordinates=701,472,55,51
+
+[DownPanelSave]
+Coordinates=257,585,93,33
+
+[DownPanelEdit]
+Coordinates=148,585,89,33
+
+[ImageZeroNewPatient]
+Coordinates=716,640,121,51
+
+[Label22]
+Coordinates=200,489,52,51
+
+[ImageZeriEventsList]
+Coordinates=701,318,115,51
+
+[Panel6]
+Coordinates=89,585,47,33
+
+[ImageZeroPatientCard]
+Coordinates=552,489,124,51
+
+[PanelZeroImages]
+Coordinates=1133,175,99,33
+
+[Image14]
+Coordinates=131,489,55,51
+
+[ImagePage]
+Coordinates=595,283,68,51
+
+[DownPanelOk]
+Coordinates=1133,230,83,33
+
+[ImageZeroAuthorization]
+Coordinates=934,87,132,51
+
+[ImageZeroPatientsList]
+Coordinates=934,276,124,51
+
+[EventsList]
+Coordinates=0,549,66,33
+
+[Label15]
+Coordinates=865,640,52,51
+
+[Label16]
+Coordinates=934,584,52,51
+
+[ImageZeroNewEvent]
+Coordinates=934,353,115,51
+
+[temp]
+Coordinates=322,254,40,33
+
+[ImageZeroSettings]
+Coordinates=871,430,107,51
+
+[Label21]
+Coordinates=934,507,52,51
+
+[ImageZeroHome]
+Coordinates=871,153,95,51
+
+[Image7]
+Coordinates=701,395,49,51
+
+[LabelPatientCardEmail]
+Coordinates=360,490,126,51
+Visible=True
+
+[Layout23]
+Coordinates=416,80,59,33
+
+[LabelPatientCardBirthday]
+Coordinates=380,290,140,51
 

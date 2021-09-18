@@ -7,11 +7,13 @@ object DataModule1: TDataModule1
       'DriverID=SQLite'
       'Database=C:\Delphi\Diagnostic\diagnostic.db'
       'Synchronous=Normal')
+    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 8
   end
   object FDQueryPatients: TFDQuery
+    Active = True
     IndexFieldNames = 'ID_Patient'
     Connection = FDConnection1
     SQL.Strings = (
@@ -36,6 +38,7 @@ object DataModule1: TDataModule1
     Top = 64
   end
   object FDQueryEvents: TFDQuery
+    Active = True
     IndexFieldNames = 'ID_Patient'
     MasterSource = DataSourcePatients
     MasterFields = 'ID_Patient'
@@ -53,6 +56,7 @@ object DataModule1: TDataModule1
       end>
   end
   object FDQueryTypeEvent: TFDQuery
+    Active = True
     IndexFieldNames = 'ID_TypeEvent'
     Connection = FDConnection1
     SQL.Strings = (
