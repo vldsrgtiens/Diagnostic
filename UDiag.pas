@@ -25,13 +25,13 @@ uses
   System.JSON, System.Net.URLClient, System.Net.HttpClient,
   System.Net.HttpClientComponent,
   System.StrUtils,IdURI,
-  REST.Json,
+  REST.Json,DateUtils,System.Threading,REST.Types,
   //************
   //FMX.Helpers.Android,
   //Androidapi.JNI.Util,
 
   FMX.Memo, FMX.Calendar, System.ImageList, FMX.ImgList, FMX.WebBrowser,
-  Data.Bind.ObjectScope, REST.Client, REST.Authenticator.OAuth;
+  Data.Bind.ObjectScope, REST.Client, REST.Authenticator.OAuth, IPPeerClient;
 type
  TTypeFileYD = (DataBaseFile, PriorityFile, UpdateFile);
  TTypeRequestYD =(DeleteFileFromYD,SaveFileToYD,MetaInfoPriorityFiles,MetaInfoUpdateFile,LoadFileFromYD);
@@ -196,10 +196,18 @@ type
     Label24: TLabel;
     LinkFillControlToField4: TLinkFillControlToField;
     ImageList1: TImageList;
-    Panel9: TPanel;
     Memo4: TMemo;
     OAuth2Authenticator1: TOAuth2Authenticator;
     CornerButton1: TCornerButton;
+    LogRect: TRectangle;
+    Layout29: TLayout;
+    LogGrayMemo: TMemo;
+    AniIndicator1: TAniIndicator;
+    RESTClient1: TRESTClient;
+    RESTRequest1: TRESTRequest;
+    CornerButton3: TCornerButton;
+    PanelWebBrowser: TPanel;
+    Layout30: TLayout;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -222,6 +230,7 @@ type
     procedure Panel7Click(Sender: TObject);
     procedure ButtonExitClick(Sender: TObject);
     procedure CornerButton1Click(Sender: TObject);
+    procedure CornerButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -233,6 +242,9 @@ type
     procedure GetAccessToken;
     procedure OnDidFinishLoadATWebBrowser(ASender:TObject);
     procedure OnDidFailLoadWithErroe(ASender:TObject);
+    function  REST_YandexDisk(FTypeRequestYD: TTypeRequestYD;
+                  FTypeFileYD: TTypeFileYD; FFileName: string): Boolean;
+    procedure RESTAfterExecute1;
   end;
 
 const
@@ -262,10 +274,15 @@ var
   IniFilePath: string;
   IniList: TStringList;
   RESTDestinationFile: string;
+  TypeFileYD:TTypeFileYD;
+  TypeRequestYD:TTypeRequestYD;
+  FlagRESTAfterExecute:Boolean;
+  ResponceStatus: string;
+  FlagRESTStatus: Boolean;
   //*****
 
   AccessTokenWebBrouser: TWebBrowser;
-implementation
+implementation  //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
 
 {$R *.fmx}
 
@@ -383,7 +400,7 @@ var
 begin
 Memo4.Lines.Add('GetAccessToken');
  AccessTokenWebBrouser:=TWebBrowser.Create(self);
- AccessTokenWebBrouser.Parent:=Panel9;
+ AccessTokenWebBrouser.Parent:=PanelWebBrowser;
  AccessTokenWebBrouser.Align:=TAlignLayout.Client;
  AccessTokenWebBrouser.OnDidFinishLoad:=OnDidFinishLoadATWebBrowser;
  AccessTokenWebBrouser.OnDidFailLoadWithError:=OnDidFinishLoadATWebBrowser;
@@ -484,12 +501,18 @@ end;
 
 procedure TForm11.CornerButton1Click(Sender: TObject);
 begin
-GetAccessToken;
+ REST_YandexDisk(MetaInfoPriorityFiles,PriorityFile,'');
 end;
 
 procedure TForm11.CornerButton2Click(Sender: TObject);
 begin
  TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+end;
+
+procedure TForm11.CornerButton3Click(Sender: TObject);
+begin
+ //REST_YandexDisk(SaveFileToYD,PriorityFile,DeviceSerial+'.txt');
+ REST_YandexDisk(SaveFileToYD,PriorityFile,'RopaSisIni.rsi');
 end;
 
 procedure TForm11.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -553,14 +576,15 @@ begin
      Memo4.Lines.Add('RopaSisIni.rsi');
      Memo4.Lines.Add(AccessToken);
      Memo4.Lines.Add(IniList.Values['expires_in']);
+     Memo4.Lines.Add(IntToStr(DaysBetween(Date, StrToDate(IniList.Values['expires_in'])))+' days');
 
-  //  if (StrToDate(IniList.Values['expires_in'])-Date)<=30 then
-  //   GetAccessToken;
+    if (DaysBetween(Date, StrToDate(IniList.Values['expires_in'])))<=30 then
+     GetAccessToken;
 
     if OAuth2Authenticator1.AccessToken='' then
      GetAccessToken
     else
-     Label32.Text:=Label32.Text+AccessToken;
+     Label32.Text:=AccessToken;
 
     IniList.Free;
   end;
@@ -816,5 +840,339 @@ begin
   end;
  end;
 end;
+
+
+
+
+
+procedure TForm11.RESTAfterExecute1;
+var
+ JSONArray: TJSONArray;
+ JSONObject: TJSONObject;
+  i,total: Integer;
+begin
+
+   case RESTRequest1.Response.StatusCode of
+    200: begin
+          //все нормально, для отладки выведем полученный JSON
+          LogGrayMemo.Lines.Add('Запрос выполнен удачно: '+IntToStr(RESTRequest1.Response.StatusCode));
+          LogGrayMemo.Lines.Add(RESTRequest1.Response.Content);
+           try
+             case TypeRequestYD of
+               DeleteFileFromYD: ;
+               SaveFileToYD: ;
+               MetaInfoPriorityFiles: begin
+
+                               JSONObject:=TJSONObject(RESTRequest1.Response.JSONValue).GetValue('_embedded') as TJSONObject;
+                               total:=StrToInt(JSONObject.GetValue('total').Value);
+                               LogGrayMemo.Lines.Add('total='+IntToStr(total));
+                               //получаем список файлов
+
+
+
+                               if total>0 then
+                                begin
+                                  JSONArray:=JSONObject.GetValue('items') as TJSONArray;
+                                  ResponceStatus:=TJSONObject(JSONArray.Items[0]).Values['name'].Value;
+                                  for i := 0 to total-1 do
+                                   begin
+                                    LogGrayMemo.Lines.Add('name: '+TJSONObject(JSONArray.Items[i]).Values['name'].Value);
+                                    LogGrayMemo.Lines.Add('created: '+TJSONObject(JSONArray.Items[i]).Values['created'].Value);
+                                   end;
+                                end
+                               else
+                                begin
+                                 LogGrayMemo.Lines.Add('папка пустая, файлов нет');
+                                 ResponceStatus:='FolderEmpty';
+                                end;
+                              end;
+              MetaInfoUpdateFile: ;
+              LoadFileFromYD: LogGrayMemo.Lines.Add('200 - файл успешно скачан');
+             end;
+           except on E: Exception do
+            ShowMessage('ERROR: RESTAfterExecute1( -'+e.Message);
+           end;
+
+         end;
+    201: LogGrayMemo.Lines.Add('201 - файл успешно загружен');
+    202: begin
+          case TypeRequestYD of
+           DeleteFileFromYD: LogGrayMemo.Lines.Add('202 - удаление начато, требуется отслеживание');
+
+           SaveFileToYD: LogGrayMemo.Lines.Add('202 - файл загружен на сервер, но пока не передан в папку назначения');
+          end;
+         end;
+    204: LogGrayMemo.Lines.Add('204 - файл успешно удален');
+    400: LogGrayMemo.Lines.Add('400 - Некорректные данные');
+    403: LogGrayMemo.Lines.Add('403 - Доступ запрещён. Возможно, у приложения недостаточно прав для данного действия');
+
+    404: begin
+          LogGrayMemo.Lines.Add('404 - Не удалось найти запрошенный ресурс');
+          ResponceStatus:='FileEmpty';
+         end;
+    406: LogGrayMemo.Lines.Add('406 - Ресурс не может быть представлен в запрошенном формате');
+    409: LogGrayMemo.Lines.Add('409 - Указанного пути "{path}" не существует');
+    412: LogGrayMemo.Lines.Add('412 - при дозагрузке файла был передан неверный диапазон в заголовке Content-Range');
+    413: LogGrayMemo.Lines.Add('413 - размер файла превышает 10Гб');
+    500: LogGrayMemo.Lines.Add('500 - внутренняя ошибка сервера, попробуйте позже');
+    503: LogGrayMemo.Lines.Add('503 - сервис недоступен, попробуйте позже');
+    507: LogGrayMemo.Lines.Add('507 - исчерпано место на Диске');
+
+    else begin
+          LogGrayMemo.Lines.Add(IntToStr(RESTRequest1.Response.StatusCode)+' - другая  ошибка');
+         end;
+   end;
+
+end;
+
+function TForm11.REST_YandexDisk(FTypeRequestYD: TTypeRequestYD;
+  FTypeFileYD: TTypeFileYD; FFileName: string): Boolean;
+var
+ Tasks: TArray<iTask>;
+ I: Integer;
+ Link: string;
+ http: THTTPClient;
+ FileStream:TFileStream;
+ begin
+  LogGrayMemo.Lines.Add('REST_YandexDisk');
+
+  TypeFileYD:=FTypeFileYD;
+  TypeRequestYD:=FTypeRequestYD;
+
+  LogRect.Visible:=true;
+  LogRect.Align:=TAlignLayout.Client;
+  LogRect.BringToFront;
+  LogGrayMemo.Lines.Clear;
+  Result:=false;
+
+  Application.ProcessMessages;
+
+  AniIndicator1.BringToFront;
+  AniIndicator1.Visible:=true;
+
+
+  OAuth2Authenticator1.TokenType:=TOAuth2TokenType.ttNONE;
+
+   //подготавливаем параметры
+  RESTClient1.BaseURL:=BaseURL;
+
+  RESTRequest1.Params.Clear;
+  RESTRequest1.Params.Add;
+  //в первую очередь дополнительный заголовок в запрос
+  //с токеном, иначе будет 401 UNAUTHORIZED
+  RESTRequest1.Params[0].Kind:=TRESTRequestParameterKind.pkHTTPHEADER;
+  RESTRequest1.Params[0].name:='Authorization';
+  RESTRequest1.Params[0].Options:=[poDoNotEncode];
+  RESTRequest1.Params[0].Value:='OAuth ' + OAuth2Authenticator1.AccessToken;
+
+  LogGrayMemo.Lines.Add('подготавливаем параметры BaseURL '+BaseURL);
+
+    //далее - путь загрузки
+  RESTRequest1.Params.Add;
+  RESTRequest1.Params[1].name:='path';
+
+  case TypeFileYD of
+   DataBaseFile: RESTRequest1.Params[1].Value:='app:/'+FFileName;//Value:='app:/DataBase/'+FFileName;
+   PriorityFile: RESTRequest1.Params[1].Value:='app:/'+FFileName;//Value:='app:/Priority/'+FFileName;
+   UpdateFile:   RESTRequest1.Params[1].Value:='app:/'+FFileName; //Value:='app:/Update/'+FFileName;   //на конкретный файл надо
+  end;
+
+  LogGrayMemo.Lines.Add('путь загрузки');
+ // устанавливаем параметры запроса
+  case TypeRequestYD of
+   DeleteFileFromYD: begin
+                      //Признак безвозвратного удаления
+                      RESTRequest1.Params.Add;
+                      RESTRequest1.Params[2].name:='permanently';
+                      RESTRequest1.Params[2].Value:='true';
+                     end;
+   SaveFileToYD: begin
+                  RESTRequest1.Params.Add;
+                  RESTRequest1.Params[2].name:='overwrite';
+                  RESTRequest1.Params[2].Value:='true';
+                 end;
+   MetaInfoPriorityFiles: begin
+                           //установить сортировку
+                           RESTRequest1.Params.Add;
+                           RESTRequest1.Params[2].name:='sort';
+                           RESTRequest1.Params[2].Value:='created';
+                          end;
+   MetaInfoUpdateFile: ;
+   LoadFileFromYD: ;
+  end;
+
+  LogGrayMemo.Lines.Add('устанавливаем параметры запроса');
+
+ // устанавливаем метод запроса
+  case TypeRequestYD of
+   DeleteFileFromYD: begin
+                      RESTRequest1.Resource:='/disk/resources';
+                      RESTRequest1.Method:=rmDELETE;
+                     end;
+   SaveFileToYD: begin
+                  RESTRequest1.Resource:='/disk/resources/upload';
+                  RESTRequest1.Method:=rmGet;
+                 end;
+   MetaInfoPriorityFiles: begin
+                           RESTRequest1.Resource:='/disk/resources';
+                           RESTRequest1.Method:=rmGET;
+                          end;
+   MetaInfoUpdateFile: ;
+   LoadFileFromYD: begin
+                    RESTRequest1.Resource:='/disk/resources/download';
+                    RESTRequest1.Method:=rmGet;
+                   end;
+  end;
+
+  LogGrayMemo.Lines.Add('устанавливаем метод запроса');
+
+  //Создаём задачу.
+  AniIndicator1.Visible:=true;
+  Application.ProcessMessages;
+
+  FlagRESTAfterExecute:=false;
+
+  SetLength(Tasks, 2);
+   Tasks[0] := TTask.Create(procedure ()
+                            begin
+                              try
+                                RESTRequest1.Execute; //выполняем запрос
+                              except on E: Exception do
+                                ShowMessage('ERROR: RESTRequest1.Execute -'+e.Message);
+                              end;
+                            end);
+
+   LogGrayMemo.Lines.Add('Отправка запроса на ЯндексДиск');
+
+   LogGrayMemo.Lines.Add('befor Запускаем задачу');
+
+   //Запускаем задачу.
+   Tasks[0].Start;
+   //Ждем завершение потока
+   TTask.WaitForAny(Tasks[0]);
+
+   Application.ProcessMessages;
+
+   LogGrayMemo.Lines.Add('Application.ProcessMessages');
+
+  case TypeRequestYD of
+   DeleteFileFromYD: RESTAfterExecute1;
+   SaveFileToYD: begin
+                  if RESTRequest1.Response.StatusCode=200 then
+                   begin
+                    //все нормально, для отладки выведем полученный JSON
+                    LogGrayMemo.Lines.Add('AfterExecute SaveFileToYD:');
+                    LogGrayMemo.Lines.Add(RESTRequest1.Response.Content);
+
+                    //выделяем ссылку на загрузку
+                    Link:=TJSONObject(RESTRequest1.Response.JSONValue).GetValue('href').Value;
+                    LogGrayMemo.lines.add(Link);   //запоминаем базовый путь
+
+                    //   ссылку на загрузку
+                    RESTClient1.BaseURL:=Link;
+                    //очищаем параметры, токен при это не нужен       RESTRequest1.Params.Clear;
+                    RESTRequest1.Resource:='';
+                    //добавляем файл в запрос
+                    RESTRequest1.AddFile(TPath.GetDocumentsPath+PathDelim+FFileName);
+                    //метод - PUT
+                    RESTRequest1.Method:=rmPUT;
+                    //ну и отправляем файл на сервер
+
+                    Application.ProcessMessages;
+                    tasks[1] := TTask.Create(procedure ()
+                                         begin
+                                          RESTRequest1.Execute; //выполняем запрос
+                                         end);
+                    //Запускаем задачу.
+                    tasks[1].Start;
+                    TTask.WaitForAny(Tasks[1]);
+                    LogGrayMemo.Lines.Add('Загрузка выполнена');
+                   end
+                  else
+                   begin
+                    LogGrayMemo.Lines.Add('запрос ссылки - ошибка '+RESTRequest1.Response.StatusCode.ToString);
+                   end;
+                 end;
+   MetaInfoPriorityFiles: RESTAfterExecute1;
+   MetaInfoUpdateFile: ;
+   LoadFileFromYD: begin
+                    if RESTRequest1.Response.StatusCode=200 then
+                     begin
+                      //все нормально, для отладки выведем полученный JSON
+                      LogGrayMemo.Lines.Add('AfterExecute LoadFileFromYD:');
+                      LogGrayMemo.Lines.Add(RESTRequest1.Response.Content);
+
+                      //выделяем ссылку на скачивания
+                      Link:=TJSONObject(RESTRequest1.Response.JSONValue).GetValue('href').Value;
+                      LogGrayMemo.lines.add(Link);
+
+
+
+
+
+                      //прописываем ссылку на загрузку
+                      RESTClient1.BaseURL:=Link;
+                      //очищаем параметры, токен при это не нужен       RESTRequest1.Params.Clear;
+                      RESTRequest1.Resource:='';
+                      //добавляем файл в запрос
+
+                     // RESTRequest1.AddFile(TPath.GetDocumentsPath+PathDelim);
+                      //RESTRequest1.Resource:='/disk/resources/download';
+                      //метод - GET
+                      RESTRequest1.Method:=rmGET;      //ну и скачивание файл на сервер
+
+
+                      Application.ProcessMessages;
+                      Tasks[1] := TTask.Create(procedure ()
+                      begin
+begin
+  //Создим класс для закачки
+  http:=THTTPClient.Create;
+  //каталог, куда файл положить
+  //Поток для сохранения
+  FileStream:=TFileStream.Create(TPath.GetDownloadsPath+PathDelim+FFileName, fmCreate);
+  try
+    //Качаем
+    http.Get(Link,FileStream);
+  finally
+    //Нас учили чистить за собой
+    http.Free;
+    FileStream.Free;
+  end;
+end;
+
+
+
+                     end);
+                    //  Запускаем задачу.
+                      Tasks[1].Start;
+                      TTask.WaitForAny(Tasks[1]);
+
+                      LogGrayMemo.Lines.Add('LoadFileFromYD: загружен');
+                     end
+                    else
+                     begin
+                      LogGrayMemo.Lines.Add('запрос ссылки - ошибка '+RESTRequest1.Response.StatusCode.ToString);
+                     end;
+                   end;
+  end;
+
+
+   SetLength(Tasks, 0);
+   Application.ProcessMessages;
+
+   LogGrayMemo.Lines.Add('Результат - '+ResponceStatus);
+   Result:=FlagRESTStatus;
+
+
+   RESTAfterExecute1;
+
+
+
+   AniIndicator1.Visible:=false;
+   LogRect.Visible:=false;
+   Application.ProcessMessages;
+end;
+
 
 end.
