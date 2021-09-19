@@ -262,9 +262,6 @@ Coordinates=383,220,113,33
 [FDPhysSQLiteDriverLink1]
 Coordinates=624,80,142,33
 
-[Label12]
-Coordinates=1003,843,52,51
-
 [ListView1]
 Coordinates=508,232,89,141
 Visible=True
@@ -440,9 +437,6 @@ Coordinates=154,997,52,51
 [ImageZeroNewEvent]
 Coordinates=555,920,115,51
 
-[temp]
-Coordinates=1861,997,40,33
-
 [ImageZeroSettings]
 Coordinates=269,920,107,51
 
@@ -485,4 +479,10 @@ Coordinates=10,843,55,51
 
 [Panel7]
 Coordinates=1546,1074,47,33
+
+[AccessTokenTab]
+Coordinates=1861,997,40,33
+
+[Label32]
+Coordinates=1003,843,52,51
 

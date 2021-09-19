@@ -21,12 +21,20 @@ uses
   {$IFDEF ANDROID}
    vkbdhelper,
   {$ENDIF}
-
-
+  //accesstoken
+  System.JSON, System.Net.URLClient, System.Net.HttpClient,
+  System.Net.HttpClientComponent,
+  System.StrUtils,IdURI,
+  REST.Json,
+  //************
   //FMX.Helpers.Android,
   //Androidapi.JNI.Util,
 
-  FMX.Memo, FMX.Calendar, System.ImageList, FMX.ImgList;
+  FMX.Memo, FMX.Calendar, System.ImageList, FMX.ImgList, FMX.WebBrowser,
+  Data.Bind.ObjectScope, REST.Client, REST.Authenticator.OAuth;
+type
+ TTypeFileYD = (DataBaseFile, PriorityFile, UpdateFile);
+ TTypeRequestYD =(DeleteFileFromYD,SaveFileToYD,MetaInfoPriorityFiles,MetaInfoUpdateFile,LoadFileFromYD);
 
 type
   TForm11 = class(TForm)
@@ -110,7 +118,7 @@ type
     LinkFillControlToField1: TLinkFillControlToField;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
-    Label12: TLabel;
+    Label32: TLabel;
     ListView1: TListView;
     Label13: TLabel;
     LinkPropertyToFieldText: TLinkPropertyToField;
@@ -155,7 +163,7 @@ type
     ImageZeriEventsList: TImage;
     ImageZeroHome: TImage;
     PanelZeroImages: TPanel;
-    temp: TTabItem;
+    AccessTokenTab: TTabItem;
     ImageZeroAuthorization: TImage;
     Panel6: TPanel;
     BindSourceDB3: TBindSourceDB;
@@ -188,6 +196,10 @@ type
     Label24: TLabel;
     LinkFillControlToField4: TLinkFillControlToField;
     ImageList1: TImageList;
+    Panel9: TPanel;
+    Memo4: TMemo;
+    OAuth2Authenticator1: TOAuth2Authenticator;
+    CornerButton1: TCornerButton;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -209,6 +221,7 @@ type
     procedure DownPanelOkClick(Sender: TObject);
     procedure Panel7Click(Sender: TObject);
     procedure ButtonExitClick(Sender: TObject);
+    procedure CornerButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -216,7 +229,18 @@ type
     procedure TabControlChange;
     function CheckNewOrEditPatient(): boolean;
     procedure BeforEditPatient;
+
+    procedure GetAccessToken;
+    procedure OnDidFinishLoadATWebBrowser(ASender:TObject);
+    procedure OnDidFailLoadWithErroe(ASender:TObject);
   end;
+
+const
+  AppKey='59d9d0d722f44267ab288b0bb6fd5d15';
+  RedirectURI = 'http://localhost';
+  AuthURL = 'https://oauth.yandex.ru/authorize?response_type=token&client_id=%s&redirect_uri=%s&device_id=%s&device_name=%s';
+  BaseURL = 'https://cloud-api.yandex.net/v1';
+
 
 var
   Form11: TForm11;
@@ -229,10 +253,155 @@ var
   ScreenService: IFMXScreenService;
   ScreenSize,sScreenSize: TPoint;
 
+  //accesstoken
+  IDDevice: integer=0;
+  DeviceBrand: string;
+  DeviceSerial: string;
+  AccessToken: string='';
+  IniFile: TextFile;
+  IniFilePath: string;
+  IniList: TStringList;
+  RESTDestinationFile: string;
+  //*****
 
+  AccessTokenWebBrouser: TWebBrowser;
 implementation
 
 {$R *.fmx}
+
+procedure TForm11.OnDidFailLoadWithErroe(ASender: TObject);
+begin
+Memo4.Lines.Add('Error');
+Memo4.Lines.Add('url: '+AccessTokenWebBrouser.URL);
+end;
+
+procedure TForm11.OnDidFinishLoadATWebBrowser(ASender:TObject);
+var
+ StrArr:TStringDynArray;
+ i: integer;
+ IniFilePath,strIni: string;
+ IniFile: TextFile;
+ FlagGetAccessToken: Boolean;
+begin
+  Memo4.Lines.Add('-------------------');
+  Memo4.Lines.Add('after redirect to '+AccessTokenWebBrouser.URL);
+
+  FlagGetAccessToken:=false;
+
+  if StartsText('https://localhost',AccessTokenWebBrouser.URL) then
+   begin
+    Memo4.Lines.Add(AccessTokenWebBrouser.URL);
+
+    //разбиваем строку
+    StrArr:=SplitString(AccessTokenWebBrouser.URL,'#?=&');
+
+    i:=1;
+    while i<length(StrArr) do
+     begin
+      Memo4.Lines.Add('StrArr['+IntToStr(i)+']='+StrArr[i]);
+      Memo4.Lines.Add('StrArr['+IntToStr(i+1)+']='+StrArr[i+1]);
+
+      if StrArr[i]='access_token' then
+       begin
+        OAuth2Authenticator1.AccessToken:=StrArr[i+1];
+        AccessToken:=OAuth2Authenticator1.AccessToken;
+        FlagGetAccessToken:=true;
+       end;
+
+      if StrArr[i]='refresh_token' then
+       begin
+        OAuth2Authenticator1.RefreshToken:=StrArr[i+1];
+       end;
+
+      if StrArr[i]='expires_in' then
+       begin
+        Memo4.Lines.Add('expires_in: '+DateToStr(now+round(StrToInt(StrArr[i+1])/60/60/24)));
+        OAuth2Authenticator1.AccessTokenExpiry:=(now+round(StrToInt(StrArr[i+1])/60/60/24));
+
+        IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
+          if not (FileExists(IniFilePath)) then
+           begin
+            ShowMessage('файл RopaSisIni отсутствует !')
+           end
+          else
+           begin
+            if FlagGetAccessToken then
+             begin
+              AssignFile(IniFile,IniFilePath);
+              Rewrite(IniFile);
+              strIni:='';
+              strIni:='AccessToken='+OAuth2Authenticator1.AccessToken;
+              strIni:=strIni+', '+'expires_in='+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry);
+              Writeln(IniFile,strIni);
+              CloseFile(IniFile);
+              Memo4.Lines.Add('файл RopaSisIni перезаписан ');
+             end;
+           end;
+
+       end;
+
+      if StrArr[i]='code' then
+       begin
+        // и делаем запрос на получение токена
+        // код подтверждения во втором элементе
+        OAuth2Authenticator1.AuthCode:=StrArr[i+1];
+        OAuth2Authenticator1.ChangeAuthCodeToAccesToken;
+       end;
+
+      if StrArr[i]='error' then
+       begin
+        // обрабатываем ошибку
+        if StrArr[i+1]='access_denied' then
+         ShowMessage('Отказ в предоставлении доступа');
+        if StrArr[i+1]='unauthorized_client' then
+         ShowMessage('Приложение заблокировано, либо ожидает модерации');
+       end;
+
+      i:=i+2;
+     end;
+
+     Memo4.Lines.Add('AccessToken= '+OAuth2Authenticator1.AccessToken);
+     Memo4.Lines.Add('RefreshToken= '+OAuth2Authenticator1.RefreshToken);
+     Memo4.Lines.Add('AccessTokenExpiry= '+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry));
+     Memo4.Lines.Add('-------------------');
+
+    // WebBrowser1.URL:='';
+     //WebBrowser1.Stop;
+    // WebBrowser1.Visible:=false;
+    AccessTokenWebBrouser.Free;
+    TabControl1.SetActiveTabWithTransition(Authorization, TTabTransition.Slide,  TTabTransitionDirection.Reversed);
+
+    // Edit9.SetFocus;
+   end;
+
+
+end;
+
+procedure TForm11.GetAccessToken;
+var
+ strURL: string;
+begin
+Memo4.Lines.Add('GetAccessToken');
+ AccessTokenWebBrouser:=TWebBrowser.Create(self);
+ AccessTokenWebBrouser.Parent:=Panel9;
+ AccessTokenWebBrouser.Align:=TAlignLayout.Client;
+ AccessTokenWebBrouser.OnDidFinishLoad:=OnDidFinishLoadATWebBrowser;
+ AccessTokenWebBrouser.OnDidFailLoadWithError:=OnDidFinishLoadATWebBrowser;
+
+// TabControl1.SetActiveTabWithTransition(Authorization, TTabTransition.Slide,  TTabTransitionDirection.Normal);
+
+
+
+strURL:=OAuth2Authenticator1.AuthorizationEndpoint;
+strURL:=strURL+'?'+'response_type='+'token';
+strURL:=strURL+'&'+'client_id='+OAuth2Authenticator1.ClientID;
+strURL:=strURL+'&'+'redirect_url='+TIdURI.URLEncode(OAuth2Authenticator1.RedirectionEndpoint);
+//strURL:=strURL+'&'+'device_id='+DeviceSerial;
+//strURL:=strURL+'&'+'device_name='+DeviceBrand;
+Memo4.Lines.Add(strURL);
+//strURL:=strURL+'&'+'login_hint='+TIdURI.URLEncode('RopaSis@yandex.ru');
+AccessTokenWebBrouser.URL:=strURL;
+end;
 
 procedure TForm11.ButtonNewPatientClick(Sender: TObject);
 begin
@@ -313,6 +482,11 @@ begin
  DataModule1.FDQueryPatients.Active:=true;
 end;
 
+procedure TForm11.CornerButton1Click(Sender: TObject);
+begin
+GetAccessToken;
+end;
+
 procedure TForm11.CornerButton2Click(Sender: TObject);
 begin
  TabControl1.SetActiveTabWithTransition(PatientsList, TTabTransition.Slide,  TTabTransitionDirection.Normal);
@@ -324,10 +498,13 @@ begin
 end;
 
 procedure TForm11.FormCreate(Sender: TObject);
+var
+ str:string;
+ MemoTemp: TMemo;
 begin
  PanelZeroImages.Visible:=false;
  NewOrEditPatient:=true;
- TabControl1.ActiveTab:=Home;
+ TabControl1.ActiveTab:=AccessTokenTab;
 
  {$IFDEF ANDROID}
   DataModule1.FDConnection1.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'diagnostic.db') ;//'$(DOC)/diagnostic.db';
@@ -353,6 +530,57 @@ begin
      LabelStatusDB.Text:= 'Not Connected';
     end;
    TabControlChange;
+
+  //accesstoken
+
+    IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
+ if not (FileExists(IniFilePath)) then
+  begin
+   ShowMessage(IniFilePath+' файл RopaSisIni отсутствует !')
+  end
+ else
+  begin
+    IniList:=TStringList.Create;
+    AssignFile(IniFile,IniFilePath);
+    Reset(IniFile);
+    Readln(IniFile,str);
+    IniList.CommaText := str;
+    CloseFile(IniFile);
+
+    AccessToken := IniList.Values['AccessToken'];
+    OAuth2Authenticator1.AccessToken:=AccessToken;
+
+     Memo4.Lines.Add('RopaSisIni.rsi');
+     Memo4.Lines.Add(AccessToken);
+     Memo4.Lines.Add(IniList.Values['expires_in']);
+
+  //  if (StrToDate(IniList.Values['expires_in'])-Date)<=30 then
+  //   GetAccessToken;
+
+    if OAuth2Authenticator1.AccessToken='' then
+     GetAccessToken
+    else
+     Label32.Text:=Label32.Text+AccessToken;
+
+    IniList.Free;
+  end;
+
+  IniFilePath:=TPath.GetDocumentsPath+PathDelim+DeviceSerial+'.txt';
+ if not (FileExists(IniFilePath)) then
+  begin
+   MemoTemp:=TMemo.Create(Self);
+   MemoTemp.Lines.Add(DateTimeToStr(Now));
+   MemoTemp.Lines.SaveToFile(IniFilePath);
+   MemoTemp.Free;
+   Memo4.Lines.Add('create file DeviceSerial.txt');
+  end
+ else
+  begin
+   Memo4.Lines.Add('finded file DeviceSerial.txt');
+  end;
+
+
+
 end;
 
 procedure TForm11.FormResize(Sender: TObject);
