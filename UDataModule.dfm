@@ -7,7 +7,6 @@ object DataModule1: TDataModule1
       'DriverID=SQLite'
       'Database=C:\Delphi\Diagnostic\diagnostic.db'
       'Synchronous=Normal')
-    Connected = True
     LoginPrompt = False
     Left = 24
     Top = 8

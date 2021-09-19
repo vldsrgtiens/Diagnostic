@@ -25,7 +25,7 @@ uses
   System.JSON, System.Net.URLClient, System.Net.HttpClient,
   System.Net.HttpClientComponent,
   System.StrUtils,IdURI,
-  REST.Json,DateUtils,System.Threading,REST.Types,
+  REST.Json,DateUtils,REST.Types,System.Threading,
   //************
   //FMX.Helpers.Android,
   //Androidapi.JNI.Util,
@@ -35,6 +35,7 @@ uses
 type
  TTypeFileYD = (DataBaseFile, PriorityFile, UpdateFile);
  TTypeRequestYD =(DeleteFileFromYD,SaveFileToYD,MetaInfoPriorityFiles,MetaInfoUpdateFile,LoadFileFromYD);
+ TTypeLog = (Ok,Error);
 
 type
   TForm11 = class(TForm)
@@ -143,7 +144,7 @@ type
     Memo1: TMemo;
     Label20: TLabel;
     Panel2: TPanel;
-    Memo2: TMemo;
+    MemoLog: TMemo;
     DateEdit1: TDateEdit;
     Panel5: TPanel;
     Layout26: TLayout;
@@ -196,7 +197,6 @@ type
     Label24: TLabel;
     LinkFillControlToField4: TLinkFillControlToField;
     ImageList1: TImageList;
-    Memo4: TMemo;
     OAuth2Authenticator1: TOAuth2Authenticator;
     CornerButton1: TCornerButton;
     LogRect: TRectangle;
@@ -208,6 +208,10 @@ type
     CornerButton3: TCornerButton;
     PanelWebBrowser: TPanel;
     Layout30: TLayout;
+    Log: TTabItem;
+    Layout31: TLayout;
+    CornerButton4: TCornerButton;
+    CornerButton5: TCornerButton;
     procedure Switch1Switch(Sender: TObject);
     procedure ButtonNewPatientClick(Sender: TObject);
     procedure CornerButton2Click(Sender: TObject);
@@ -231,6 +235,9 @@ type
     procedure ButtonExitClick(Sender: TObject);
     procedure CornerButton1Click(Sender: TObject);
     procedure CornerButton3Click(Sender: TObject);
+    procedure Image10Click(Sender: TObject);
+    procedure CornerButton4Click(Sender: TObject);
+    procedure CornerButton5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -238,10 +245,11 @@ type
     procedure TabControlChange;
     function CheckNewOrEditPatient(): boolean;
     procedure BeforEditPatient;
+    procedure LogWrite(LogType: TTypeLog; str: string);
 
     procedure GetAccessToken;
     procedure OnDidFinishLoadATWebBrowser(ASender:TObject);
-    procedure OnDidFailLoadWithErroe(ASender:TObject);
+    procedure OnDidFinishErrorATWebBrowser(ASender:TObject);
     function  REST_YandexDisk(FTypeRequestYD: TTypeRequestYD;
                   FTypeFileYD: TTypeFileYD; FFileName: string): Boolean;
     procedure RESTAfterExecute1;
@@ -286,10 +294,11 @@ implementation  //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
 
 {$R *.fmx}
 
-procedure TForm11.OnDidFailLoadWithErroe(ASender: TObject);
+
+
+procedure TForm11.OnDidFinishErrorATWebBrowser(ASender: TObject);
 begin
-Memo4.Lines.Add('Error');
-Memo4.Lines.Add('url: '+AccessTokenWebBrouser.URL);
+
 end;
 
 procedure TForm11.OnDidFinishLoadATWebBrowser(ASender:TObject);
@@ -300,14 +309,14 @@ var
  IniFile: TextFile;
  FlagGetAccessToken: Boolean;
 begin
-  Memo4.Lines.Add('-------------------');
-  Memo4.Lines.Add('after redirect to '+AccessTokenWebBrouser.URL);
+  LogWrite(Ok, '-------------------');
+  LogWrite(Ok,'after redirect to '+AccessTokenWebBrouser.URL);
 
   FlagGetAccessToken:=false;
 
   if StartsText('https://localhost',AccessTokenWebBrouser.URL) then
    begin
-    Memo4.Lines.Add(AccessTokenWebBrouser.URL);
+    LogWrite(Ok,AccessTokenWebBrouser.URL);
 
     //разбиваем строку
     StrArr:=SplitString(AccessTokenWebBrouser.URL,'#?=&');
@@ -315,8 +324,8 @@ begin
     i:=1;
     while i<length(StrArr) do
      begin
-      Memo4.Lines.Add('StrArr['+IntToStr(i)+']='+StrArr[i]);
-      Memo4.Lines.Add('StrArr['+IntToStr(i+1)+']='+StrArr[i+1]);
+      LogWrite(Ok,'StrArr['+IntToStr(i)+']='+StrArr[i]);
+      LogWrite(Ok,'StrArr['+IntToStr(i+1)+']='+StrArr[i+1]);
 
       if StrArr[i]='access_token' then
        begin
@@ -332,7 +341,7 @@ begin
 
       if StrArr[i]='expires_in' then
        begin
-        Memo4.Lines.Add('expires_in: '+DateToStr(now+round(StrToInt(StrArr[i+1])/60/60/24)));
+        LogWrite(Ok,'expires_in: '+DateToStr(now+round(StrToInt(StrArr[i+1])/60/60/24)));
         OAuth2Authenticator1.AccessTokenExpiry:=(now+round(StrToInt(StrArr[i+1])/60/60/24));
 
         IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
@@ -351,7 +360,7 @@ begin
               strIni:=strIni+', '+'expires_in='+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry);
               Writeln(IniFile,strIni);
               CloseFile(IniFile);
-              Memo4.Lines.Add('файл RopaSisIni перезаписан ');
+              LogWrite(Ok,'файл RopaSisIni перезаписан ');
              end;
            end;
 
@@ -377,10 +386,10 @@ begin
       i:=i+2;
      end;
 
-     Memo4.Lines.Add('AccessToken= '+OAuth2Authenticator1.AccessToken);
-     Memo4.Lines.Add('RefreshToken= '+OAuth2Authenticator1.RefreshToken);
-     Memo4.Lines.Add('AccessTokenExpiry= '+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry));
-     Memo4.Lines.Add('-------------------');
+     LogWrite(Ok,'AccessToken= '+OAuth2Authenticator1.AccessToken);
+     LogWrite(Ok,'RefreshToken= '+OAuth2Authenticator1.RefreshToken);
+     LogWrite(Ok,'AccessTokenExpiry= '+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry));
+     LogWrite(Ok,'-------------------');
 
     // WebBrowser1.URL:='';
      //WebBrowser1.Stop;
@@ -398,7 +407,7 @@ procedure TForm11.GetAccessToken;
 var
  strURL: string;
 begin
-Memo4.Lines.Add('GetAccessToken');
+ LogWrite(Ok, 'GetAccessToken');
  AccessTokenWebBrouser:=TWebBrowser.Create(self);
  AccessTokenWebBrouser.Parent:=PanelWebBrowser;
  AccessTokenWebBrouser.Align:=TAlignLayout.Client;
@@ -415,9 +424,10 @@ strURL:=strURL+'&'+'client_id='+OAuth2Authenticator1.ClientID;
 strURL:=strURL+'&'+'redirect_url='+TIdURI.URLEncode(OAuth2Authenticator1.RedirectionEndpoint);
 //strURL:=strURL+'&'+'device_id='+DeviceSerial;
 //strURL:=strURL+'&'+'device_name='+DeviceBrand;
-Memo4.Lines.Add(strURL);
+LogWrite(Ok, strURL);
 //strURL:=strURL+'&'+'login_hint='+TIdURI.URLEncode('RopaSis@yandex.ru');
 AccessTokenWebBrouser.URL:=strURL;
+Application.ProcessMessages;
 end;
 
 procedure TForm11.ButtonNewPatientClick(Sender: TObject);
@@ -515,6 +525,19 @@ begin
  REST_YandexDisk(SaveFileToYD,PriorityFile,'RopaSisIni.rsi');
 end;
 
+procedure TForm11.CornerButton4Click(Sender: TObject);
+begin
+GetAccessToken;
+end;
+
+procedure TForm11.CornerButton5Click(Sender: TObject);
+begin
+     LogWrite(Ok,'AccessToken= '+OAuth2Authenticator1.AccessToken);
+     LogWrite(Ok,'RefreshToken= '+OAuth2Authenticator1.RefreshToken);
+     LogWrite(Ok,'AccessTokenExpiry= '+DateTimeToStr(OAuth2Authenticator1.AccessTokenExpiry));
+     LogWrite(Ok,'-------------------');
+end;
+
 procedure TForm11.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
  DataModule1.FDConnection1.Connected:=false;
@@ -524,6 +547,7 @@ procedure TForm11.FormCreate(Sender: TObject);
 var
  str:string;
  MemoTemp: TMemo;
+ fileStream: TFileStream;
 begin
  PanelZeroImages.Visible:=false;
  NewOrEditPatient:=true;
@@ -559,7 +583,13 @@ begin
     IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
  if not (FileExists(IniFilePath)) then
   begin
-   ShowMessage(IniFilePath+' файл RopaSisIni отсутствует !')
+   ShowMessage(IniFilePath+' файл RopaSisIni отсутствует !');
+   IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
+   MemoTemp:=TMemo.Create(Self);
+   MemoTemp.Lines.Add('AccessToken=, expires_in=');
+   MemoTemp.Lines.SaveToFile(IniFilePath);
+   MemoTemp.Free;
+   LogWrite(Ok,('create file '+IniFilePath));
   end
  else
   begin
@@ -573,10 +603,10 @@ begin
     AccessToken := IniList.Values['AccessToken'];
     OAuth2Authenticator1.AccessToken:=AccessToken;
 
-     Memo4.Lines.Add('RopaSisIni.rsi');
-     Memo4.Lines.Add(AccessToken);
-     Memo4.Lines.Add(IniList.Values['expires_in']);
-     Memo4.Lines.Add(IntToStr(DaysBetween(Date, StrToDate(IniList.Values['expires_in'])))+' days');
+     LogWrite(Ok, 'RopaSisIni.rsi');
+     LogWrite(Ok,AccessToken);
+     LogWrite(Ok,IniList.Values['expires_in']);
+     LogWrite(Ok,IntToStr(DaysBetween(Date, StrToDate(IniList.Values['expires_in'])))+' days');
 
     if (DaysBetween(Date, StrToDate(IniList.Values['expires_in'])))<=30 then
      GetAccessToken;
@@ -596,11 +626,11 @@ begin
    MemoTemp.Lines.Add(DateTimeToStr(Now));
    MemoTemp.Lines.SaveToFile(IniFilePath);
    MemoTemp.Free;
-   Memo4.Lines.Add('create file DeviceSerial.txt');
+   LogWrite(Ok,'create file DeviceSerial.txt');
   end
  else
   begin
-   Memo4.Lines.Add('finded file DeviceSerial.txt');
+   LogWrite(Ok,'finded file DeviceSerial.txt');
   end;
 
 
@@ -613,11 +643,11 @@ if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterfa
   begin
     sScreenSize := ScreenService.GetScreenSize.Round;
     sScale := ScreenService.GetScreenScale;
-    Memo2.Lines.Add('diScreenLogic :'+ intToStr( sScreenSize.x) + ' x ' + intToStr( sScreenSize.y));
-    Memo2.Lines.Add('diScreenPhis :'+ floatToStr(sScreenSize.x * sScale) + ' x ' + floatToStr(sScreenSize.y * sScale));
-    Memo2.Lines.Add('diScreenWidth :'+ intToStr(sScreenSize.x));
-    Memo2.Lines.Add('diScreenHeight :'+ intToStr(sScreenSize.y));
-    Memo2.Lines.Add('diScale :'+ FloatToStr( sScale));
+    LogWrite(Ok,('diScreenLogic :'+ intToStr( sScreenSize.x) + ' x ' + intToStr( sScreenSize.y)));
+    LogWrite(Ok,('diScreenPhis :'+ floatToStr(sScreenSize.x * sScale) + ' x ' + floatToStr(sScreenSize.y * sScale)));
+    LogWrite(Ok,('diScreenWidth :'+ intToStr(sScreenSize.x)));
+    LogWrite(Ok,('diScreenHeight :'+ intToStr(sScreenSize.y)));
+    LogWrite(Ok,('diScale :'+ FloatToStr( sScale)));
   end;
 
   case TOSVersion.Platform of
@@ -709,6 +739,19 @@ begin
  ImagePage.Width:=ImagePage.Height;
 end;
 
+procedure TForm11.Image10Click(Sender: TObject);
+var
+ MemoTemp: TMemo;
+begin
+ IniFilePath:=TPath.GetDocumentsPath+PathDelim+'RopaSisIni.rsi';
+   MemoTemp:=TMemo.Create(Self);
+   MemoTemp.Lines.Add('AccessToken=AQAAAABWtd7JAAdShFVue4geV0RHpyr4NJ8BoBE, expires_in=20.01.2020');
+   MemoTemp.Lines.SaveToFile(IniFilePath);
+   MemoTemp.Free;
+   LogWrite(Ok,('create file '+IniFilePath));
+
+end;
+
 procedure TForm11.Image8Click(Sender: TObject);
 begin
  Application.Terminate;
@@ -723,6 +766,14 @@ begin
   ListView2.Items.Clear;
   DataModule1.FDQueryEvents.Active:=true;
   DownPanelOk.Enabled:=true;
+end;
+
+procedure TForm11.LogWrite(LogType: TTypeLog; str: string);
+begin
+ case LogType of
+   Ok: MemoLog.Lines.Add('Ok - '+str);
+   Error: MemoLog.Lines.Add('Error - '+str);
+ end;
 end;
 
 procedure TForm11.Panel7Click(Sender: TObject);
@@ -944,11 +995,10 @@ var
   LogRect.BringToFront;
   LogGrayMemo.Lines.Clear;
   Result:=false;
-
-  Application.ProcessMessages;
-
   AniIndicator1.BringToFront;
   AniIndicator1.Visible:=true;
+
+  Application.ProcessMessages;
 
 
   OAuth2Authenticator1.TokenType:=TOAuth2TokenType.ttNONE;
@@ -1027,8 +1077,6 @@ var
   LogGrayMemo.Lines.Add('устанавливаем метод запроса');
 
   //Создаём задачу.
-  AniIndicator1.Visible:=true;
-  Application.ProcessMessages;
 
   FlagRESTAfterExecute:=false;
 
@@ -1161,7 +1209,7 @@ end;
    SetLength(Tasks, 0);
    Application.ProcessMessages;
 
-   LogGrayMemo.Lines.Add('Результат - '+ResponceStatus);
+   //LogGrayMemo.Lines.Add('Результат - '+ResponceStatus);
    Result:=FlagRESTStatus;
 
 

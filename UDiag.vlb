@@ -347,9 +347,6 @@ Coordinates=1081,843,100,51
 [Memo1]
 Coordinates=1593,920,49,51
 
-[Memo2]
-Coordinates=871,920,49,51
-
 [Panel5]
 Coordinates=1862,1074,47,33
 
@@ -485,4 +482,7 @@ Coordinates=1861,997,40,33
 
 [Label32]
 Coordinates=1003,843,52,51
+
+[MemoLog]
+Coordinates=871,920,49,51
 
